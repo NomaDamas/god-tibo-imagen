@@ -244,6 +244,33 @@ result = client.generate_image(
 print(result.saved_path)
 ```
 
+## Codex Skill Example
+
+For users who want to invoke `god-tibo-imagen` from within Codex, an example skill and wrapper script are provided in `examples/codex-skill/`.
+
+### Setup
+
+- Python 3.10+
+- `pip install god-tibo-imagen` (the import name is `gti`, not `god_tibo_imagen`)
+- Local Codex auth in `~/.codex/auth.json` with `auth_mode = chatgpt`
+
+### Wrapper script
+
+```bash
+# Dry run
+python examples/codex-skill-wrapper.py --prompt "flat blue square icon" --output ./test.png --dry-run
+
+# Live generation
+python examples/codex-skill-wrapper.py --prompt "flat blue square icon" --output ./out.png
+
+# With image inputs
+python examples/codex-skill-wrapper.py --prompt "Make this cat wear a hat" --image ./cat.png --output ./cat-hat.png
+```
+
+### Skill file
+
+The Codex skill definition is at `examples/codex-skill/SKILL.md`. You can copy this directory into your Codex skills path (e.g., `~/.codex/skills/god-tibo-imagen/`) for easier invocation.
+
 ## Key files
 
 - `src/auth/loadCodexSession.js` — reads Codex auth state
