@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "god-tibo-imagen"
-version = "0.1.2"
+version = "0.2.0"
 description = "Python SDK for Codex private image generation backend"
 readme = "README.md"
 requires-python = ">=3.10"

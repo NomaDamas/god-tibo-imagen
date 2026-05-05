@@ -1,66 +1,61 @@
 name: Release
 
 on:
-  push:
-    tags:
-      - "v*"
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version to release (e.g., 0.2.1)"
+        required: true
+        type: string
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
-  validate-version:
-    name: validate-version
+  bump-version:
+    name: bump-version
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-
-      - name: Validate release version
-        shell: bash
+      - name: Configure git
         run: |
-          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          tag_version="${GITHUB_REF_NAME#v}"
-          package_version="$(node -p "require('./package.json').version")"
-          version_file="$(tr -d '[:space:]' < VERSION)"
-          pyproject_version="$(grep '^version = ' python/pyproject.toml | head -n1 | cut -d'"' -f2)"
+      - name: Bump version
+        run: |
+          echo "${{ inputs.version }}" > VERSION
+          node scripts/sync-version.js
+          npm ci
+          npm run build:types
 
-          if [[ "$package_version" != "$tag_version" ]]; then
-            echo "package.json version ($package_version) does not match tag version ($tag_version)" >&2
-            exit 1
-          fi
-
-          if [[ "$pyproject_version" != "$tag_version" ]]; then
-            echo "pyproject.toml version ($pyproject_version) does not match tag version ($tag_version)" >&2
-            exit 1
-          fi
-
-          if [[ "$version_file" != "$tag_version" ]]; then
-            echo "VERSION file ($version_file) does not match tag version ($tag_version)" >&2
-            exit 1
-          fi
-
-          echo "Validated release version: $tag_version"
+      - name: Commit, push, and tag
+        run: |
+          git add -A
+          git commit -m "chore: release v${{ inputs.version }}"
+          git push origin main
+          git tag "v${{ inputs.version }}"
+          git push origin "v${{ inputs.version }}"
 
   publish-npm:
     name: publish-npm
     runs-on: ubuntu-latest
     needs:
-      - validate-version
+      - bump-version
     steps:
-      - name: Check out repository
+      - name: Check out repository at tag
         uses: actions/checkout@v4
+        with:
+          ref: v${{ inputs.version }}
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -84,10 +79,12 @@ jobs:
     name: publish-pypi
     runs-on: ubuntu-latest
     needs:
-      - validate-version
+      - bump-version
     steps:
-      - name: Check out repository
+      - name: Check out repository at tag
         uses: actions/checkout@v4
+        with:
+          ref: v${{ inputs.version }}
 
       - name: Set up Python
         uses: actions/setup-python@v5
