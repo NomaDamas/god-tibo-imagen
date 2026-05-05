@@ -29,6 +29,7 @@ function parseArgs(argv) {
     debugDir: null,
     provider: null,
     images: [],
+    size: null,
     help: false
   };
 
@@ -75,6 +76,10 @@ function parseArgs(argv) {
         break;
       case '--image':
         parsed.images.push(next);
+        index += 1;
+        break;
+      case '--size':
+        parsed.size = next;
         index += 1;
         break;
       case '--dry-run':
@@ -136,6 +141,8 @@ Options:
   --model <name>                Model name (default: CODEX_IMAGEGEN_MODEL or gpt-5.4)
   --provider <name>             Provider: private-codex | codex-cli | auto
   --image <path>                Input image path (can be used multiple times)
+  --size <value>                Output image size: auto, 1024x1024, 1536x1024, 1024x1536,
+                                2048x2048, 2048x1152, 3840x2160, 2160x3840 (private-codex only)
   --dry-run                     Print the request shape without calling the backend
   --debug                       Write sanitized request/response dumps
   --debug-dir <path>            Directory for sanitized debug artifacts
@@ -176,7 +183,8 @@ async function main() {
     dryRun: args.dryRun,
     debug: args.debug,
     debugDir: args.debugDir ? path.resolve(args.debugDir) : args.debug ? path.resolve('.debug-codex-imagegen') : null,
-    images
+    images,
+    ...(args.size ? { size: args.size } : {})
   });
 
   if (result.mode === 'dry-run') {

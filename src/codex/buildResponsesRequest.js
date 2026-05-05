@@ -65,7 +65,7 @@ export function sanitizeRequestBody(body) {
 /**
  * Build the private Codex `/responses` request payload.
  *
- * @param {{ baseUrl: string, session: { accessToken: string, accountId: string, installationId?: string | null }, prompt: string, model: string, originator: string, includeReasoning?: boolean, sessionId?: string, images?: string[] }} options - Request inputs.
+ * @param {{ baseUrl: string, session: { accessToken: string, accountId: string, installationId?: string | null }, prompt: string, model: string, originator: string, includeReasoning?: boolean, sessionId?: string, images?: string[], size?: string }} options - Request inputs.
  * @returns {{ url: string, sessionId: string, headers: Record<string, string>, body: Record<string, unknown>, sanitized: { url: string, headers: Record<string, string>, body: Record<string, unknown> } }} Request details and a redacted debug copy.
  */
 export function buildResponsesRequest({
@@ -76,7 +76,8 @@ export function buildResponsesRequest({
   originator,
   includeReasoning = true,
   sessionId = crypto.randomUUID(),
-  images
+  images,
+  size
 }) {
   if (!prompt || !prompt.trim()) {
     throw new Error('Prompt is required.');
@@ -109,7 +110,11 @@ export function buildResponsesRequest({
         content
       }
     ],
-    tools: [{ type: 'image_generation', output_format: 'png' }],
+    tools: [{
+      type: 'image_generation',
+      output_format: 'png',
+      ...(size ? { size } : {})
+    }],
     tool_choice: 'auto',
     parallel_tool_calls: false,
     reasoning: null,

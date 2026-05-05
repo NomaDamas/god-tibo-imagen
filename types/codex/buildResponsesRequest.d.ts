@@ -31,10 +31,10 @@ export function sanitizeRequestBody(body: {
 /**
  * Build the private Codex `/responses` request payload.
  *
- * @param {{ baseUrl: string, session: { accessToken: string, accountId: string, installationId?: string | null }, prompt: string, model: string, originator: string, includeReasoning?: boolean, sessionId?: string, images?: string[] }} options - Request inputs.
+ * @param {{ baseUrl: string, session: { accessToken: string, accountId: string, installationId?: string | null }, prompt: string, model: string, originator: string, includeReasoning?: boolean, sessionId?: string, images?: string[], size?: string }} options - Request inputs.
  * @returns {{ url: string, sessionId: string, headers: Record<string, string>, body: Record<string, unknown>, sanitized: { url: string, headers: Record<string, string>, body: Record<string, unknown> } }} Request details and a redacted debug copy.
  */
-export function buildResponsesRequest({ baseUrl, session, prompt, model, originator, includeReasoning, sessionId, images }: {
+export function buildResponsesRequest({ baseUrl, session, prompt, model, originator, includeReasoning, sessionId, images, size }: {
     baseUrl: string;
     session: {
         accessToken: string;
@@ -47,6 +47,7 @@ export function buildResponsesRequest({ baseUrl, session, prompt, model, origina
     includeReasoning?: boolean;
     sessionId?: string;
     images?: string[];
+    size?: string;
 }): {
     url: string;
     sessionId: string;
