@@ -90,6 +90,23 @@ gti --prompt "Combine these two styles" --image ./style-a.png --image ./style-b.
 
 Supported formats: `png`, `jpg`/`jpeg`, `gif`, `webp`.
 
+### Output size
+
+Pass `--size <value>` to control the output image dimensions. Supported values match the gpt-image-2 spec:
+
+```bash
+gti --prompt "a sunset over mountains" --size 1536x1024 --output ./sunset.png
+```
+
+Supported sizes:
+
+- `auto` (model decides)
+- `1024x1024`, `2048x2048` (square)
+- `1536x1024`, `2048x1152`, `3840x2160` (landscape)
+- `1024x1536`, `2160x3840` (portrait)
+
+The `--size` flag is forwarded to the `image_generation` tool config and is honored by the private Codex backend. The `codex-cli` provider does not support `--size` and will ignore it.
+
 ### Provider modes
 
 ```bash
@@ -143,6 +160,14 @@ const result = await provider.generateImage({
   model: 'gpt-5.4',
   outputPath: './cat-hat.png',
   images: ['data:image/png;base64,iVBORw0KGgo...']
+});
+
+// with output size
+const result = await provider.generateImage({
+  prompt: 'a sunset over mountains',
+  model: 'gpt-5.4',
+  outputPath: './sunset.png',
+  size: '1536x1024'
 });
 
 // multiple images
