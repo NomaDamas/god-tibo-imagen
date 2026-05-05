@@ -61,6 +61,42 @@ def test_build_responses_request_includes_input_image_when_images_provided():
     assert content[2] == {"type": "input_image", "image_url": "data:image/png;base64,def456"}
 
 
+def test_build_responses_request_forwards_size_to_tool_config():
+    session = {"accessToken": "token-1", "accountId": "acct-1"}
+    result = build_responses_request(
+        base_url="https://chatgpt.com/backend-api/codex",
+        session=session,
+        prompt="make this blue",
+        model="gpt-5.4",
+        originator="codex_cli_rs",
+        size="1536x1024",
+    )
+
+    assert result["body"]["tools"] == [
+        {
+            "type": "image_generation",
+            "output_format": "png",
+            "size": "1536x1024",
+        }
+    ]
+
+
+def test_build_responses_request_rejects_unsupported_size():
+    with pytest.raises(Exception) as exc_info:
+        build_responses_request(
+            base_url="https://example.com",
+            session={"accessToken": "a", "accountId": "b"},
+            prompt="flat blue square",
+            model="gpt-5.4",
+            originator="orig",
+            size="999x999",
+        )
+
+    message = str(exc_info.value)
+    assert "Unsupported image size: 999x999" in message
+    assert "1536x1024" in message
+
+
 def test_build_responses_request_omits_input_image_when_images_none():
     session = {"accessToken": "token-1", "accountId": "acct-1"}
     result = build_responses_request(

@@ -132,6 +132,7 @@ class PrivateCodexProvider:
         model: str,
         output_path: str,
         images: list[str] | None = None,
+        size: str | None = None,
         dry_run: bool = False,
         debug: bool = False,
         debug_dir: str | Path | None = None,
@@ -148,6 +149,7 @@ class PrivateCodexProvider:
             model=model,
             originator=self.config["defaultOriginator"],
             images=images,
+            size=size,
         )
 
         if dry_run:

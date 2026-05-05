@@ -10,7 +10,7 @@ from .config import (
 )
 from .extract import extract_image_generation
 from .provider import create_private_codex_provider
-from .request_builder import build_responses_request
+from .request_builder import SUPPORTED_IMAGE_SIZES, build_responses_request
 from .save import save_image
 from .sse_parser import parse_sse_text, summarize_events
 
@@ -21,6 +21,7 @@ __all__ = [
     "GenerateImageResult",
     "PRIVATE_CODEX_PROVIDER",
     "SUPPORTED_PROVIDERS",
+    "SUPPORTED_IMAGE_SIZES",
     "UNSUPPORTED_WARNING",
     "build_responses_request",
     "create_private_codex_provider",

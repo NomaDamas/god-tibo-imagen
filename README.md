@@ -194,6 +194,15 @@ result = client.generate_image(
     output_path="./out.png"
 )
 print(result.saved_path)
+
+# with output size
+result = client.generate_image(
+    prompt="a sunset over mountains",
+    model="gpt-5.4",
+    output_path="./sunset.png",
+    size="1536x1024"
+)
+print(result.saved_path)
 ```
 
 You can also pass existing images as input:

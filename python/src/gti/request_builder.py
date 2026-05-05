@@ -10,6 +10,16 @@ REDACTED_ACCOUNT_ID = "[REDACTED_ACCOUNT_ID]"
 REDACTED_SESSION_ID = "[REDACTED_SESSION_ID]"
 REDACTED_INSTALLATION_ID = "[REDACTED_INSTALLATION_ID]"
 REDACTED_IMAGE_URL = "[REDACTED_IMAGE_URL]"
+SUPPORTED_IMAGE_SIZES = (
+    "auto",
+    "1024x1024",
+    "1536x1024",
+    "1024x1536",
+    "2048x2048",
+    "2048x1152",
+    "3840x2160",
+    "2160x3840",
+)
 
 
 def sanitize_headers(headers: dict[str, Any]) -> dict[str, Any]:
@@ -48,9 +58,13 @@ def build_responses_request(
     include_reasoning: bool = True,
     session_id: str | None = None,
     images: list[str] | None = None,
+    size: str | None = None,
 ) -> dict[str, Any]:
     if not prompt or not prompt.strip():
         raise make_error("Prompt is required.")
+    if size and size not in SUPPORTED_IMAGE_SIZES:
+        supported = ", ".join(SUPPORTED_IMAGE_SIZES)
+        raise make_error(f"Unsupported image size: {size}. Supported sizes: {supported}.")
 
     base = f"{base_url}/" if not base_url.endswith("/") else base_url
     url = f"{base}responses"
@@ -80,7 +94,13 @@ def build_responses_request(
                 "content": content,
             }
         ],
-        "tools": [{"type": "image_generation", "output_format": "png"}],
+        "tools": [
+            {
+                "type": "image_generation",
+                "output_format": "png",
+                **({"size": size} if size else {}),
+            }
+        ],
         "tool_choice": "auto",
         "parallel_tool_calls": False,
         "reasoning": None,
