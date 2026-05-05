@@ -23,7 +23,7 @@ def main() -> int:
     )
     parser.add_argument("--prompt", required=True, help="Image generation prompt")
     parser.add_argument("--output", help="Output file path")
-    parser.add_argument("--model", default="gpt-5.4", help="Model to use")
+    parser.add_argument("--model", help="Model to use (defaults to SDK configuration)")
     parser.add_argument("--dry-run", action="store_true", help="Dry run mode")
     parser.add_argument("--auth-file", help="Path to Codex auth.json")
     parser.add_argument(
@@ -49,9 +49,10 @@ def main() -> int:
 
     gen_kwargs: dict[str, object] = {
         "prompt": args.prompt,
-        "model": args.model,
         "dry_run": args.dry_run,
     }
+    if args.model:
+        gen_kwargs["model"] = args.model
     if args.output:
         gen_kwargs["output_path"] = args.output
     if args.image:
@@ -61,14 +62,20 @@ def main() -> int:
 
     result = client.generate_image(**gen_kwargs)
 
-    print(json.dumps({
+    output = {
         "mode": result.mode,
         "savedPath": result.saved_path,
         "responseId": result.response_id,
         "sessionId": result.session_id,
         "revisedPrompt": result.revised_prompt,
         "warnings": result.warnings,
-    }, indent=2))
+    }
+    if result.request is not None:
+        output["request"] = result.request
+    if result.response is not None:
+        output["response"] = result.response
+
+    print(json.dumps(output, indent=2))
 
     return 0
 

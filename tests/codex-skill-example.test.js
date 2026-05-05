@@ -63,6 +63,11 @@ test('codex-skill agents/openai.yaml exists and is valid', async () => {
   const content = await fs.readFile(openaiYamlPath, 'utf8');
   assert.ok(content.includes('interface:'), 'openai.yaml should have interface section');
   assert.ok(content.includes('display_name:'), 'openai.yaml should have display_name');
+  assert.ok(content.includes('allow_implicit_invocation: false'), 'skill should not be implicitly invoked for generic image requests');
+  for (const match of content.matchAll(/:\s*["']?(\.\/[^"'\n]+)["']?/g)) {
+    const referencedPath = path.join(skillDir, match[1]);
+    assert.equal(await fileExists(referencedPath), true, `${match[1]} should exist`);
+  }
 });
 
 test('README.md contains Codex skill example section', async () => {

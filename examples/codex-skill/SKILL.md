@@ -3,8 +3,8 @@ name: god-tibo-imagen
 description: >
   Use when the user wants to generate images via the god-tibo-imagen Python SDK
   using local Codex ChatGPT authentication.
-  Trigger phrases: "generate an image", "create an image", "make a picture",
-  "image generation with gti", "run god-tibo-imagen".
+  Trigger phrases: "image generation with gti", "run god-tibo-imagen",
+  "generate with god-tibo-imagen", "use the gti private backend".
   Do NOT use for general image editing or public API image generation.
 argument-hint: "[--prompt <text>] [--output <path>] [--dry-run]"
 ---

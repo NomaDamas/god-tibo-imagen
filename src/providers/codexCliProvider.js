@@ -144,7 +144,7 @@ async function runCodexPreflight(execImpl) {
  * Create a provider that uses `codex exec` as the image-generation fallback.
  *
  * @param {{ generatedImagesDir: string }} config - Runtime configuration.
- * @returns {{ generateImage: (args: { prompt: string, model?: string, outputPath: string, debug?: boolean, debugDir?: string, execImpl?: typeof runCommand }) => Promise<{ mode: string, provider: string, warnings: string[], responseId: null, sessionId: string | null, savedPath: string, revisedPrompt: null, request: unknown, response: unknown }> }} Provider implementation.
+ * @returns {{ generateImage: (args: { prompt: string, model?: string, outputPath: string, debug?: boolean, debugDir?: string, execImpl?: typeof runCommand, images?: string[], size?: string }) => Promise<{ mode: string, provider: string, warnings: string[], responseId: null, sessionId: string | null, savedPath: string, revisedPrompt: null, request: unknown, response: unknown }> }} Provider implementation.
  */
 export function createCodexCliProvider(config) {
   return {
@@ -155,10 +155,14 @@ export function createCodexCliProvider(config) {
       debug = false,
       debugDir,
       execImpl = runCommand,
-      images
+      images,
+      size
     }) {
       if (images && images.length > 0) {
         throw new Error('The codex-cli provider does not support image input.');
+      }
+      if (size) {
+        throw new Error('The codex-cli provider does not support output size selection.');
       }
 
       if (!prompt || !prompt.trim()) {

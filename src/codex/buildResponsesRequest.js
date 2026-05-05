@@ -5,6 +5,16 @@ export const REDACTED_ACCOUNT_ID = '[REDACTED_ACCOUNT_ID]';
 export const REDACTED_SESSION_ID = '[REDACTED_SESSION_ID]';
 export const REDACTED_INSTALLATION_ID = '[REDACTED_INSTALLATION_ID]';
 export const REDACTED_IMAGE_DATA = '[REDACTED_IMAGE_DATA]';
+export const SUPPORTED_IMAGE_SIZES = new Set([
+  'auto',
+  '1024x1024',
+  '1536x1024',
+  '1024x1536',
+  '2048x2048',
+  '2048x1152',
+  '3840x2160',
+  '2160x3840'
+]);
 
 /**
  * Return a redacted copy of request headers for debug output.
@@ -81,6 +91,9 @@ export function buildResponsesRequest({
 }) {
   if (!prompt || !prompt.trim()) {
     throw new Error('Prompt is required.');
+  }
+  if (size && !SUPPORTED_IMAGE_SIZES.has(size)) {
+    throw new Error(`Unsupported image size: ${size}. Supported sizes: ${Array.from(SUPPORTED_IMAGE_SIZES).join(', ')}.`);
   }
 
   const url = new URL('responses', baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`).toString();

@@ -105,7 +105,7 @@ Supported sizes:
 - `1536x1024`, `2048x1152`, `3840x2160` (landscape)
 - `1024x1536`, `2160x3840` (portrait)
 
-The `--size` flag is forwarded to the `image_generation` tool config and is honored by the private Codex backend. The `codex-cli` provider does not support `--size` and will ignore it.
+The `--size` flag is forwarded to the `image_generation` tool config and is honored by the private Codex backend. The `codex-cli` provider does not support `--size`; direct `codex-cli` use and `auto` fallback fail fast rather than silently ignoring requested dimensions.
 
 ### Provider modes
 

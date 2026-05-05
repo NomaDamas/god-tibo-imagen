@@ -32,3 +32,26 @@ test('auto provider falls back to codex-cli when private provider fails', async 
     /missing png|no generated PNG/i
   );
 });
+
+test('auto provider refuses codex-cli fallback when size is requested', async () => {
+  const provider = createProvider({
+    provider: 'auto',
+    generatedImagesDir: '/tmp/missing',
+    baseUrl: 'https://chatgpt.com/backend-api/codex',
+    authFile: '/tmp/missing-auth.json',
+    installationIdFile: '/tmp/missing-installation-id',
+    defaultOriginator: 'codex_cli_rs'
+  });
+
+  await assert.rejects(
+    provider.generateImage({
+      prompt: 'red square',
+      outputPath: '/tmp/out.png',
+      size: '1536x1024',
+      execImpl: async () => {
+        throw new Error('codex-cli should not be called when size fallback is unsafe');
+      }
+    }),
+    /cannot fall back to codex-cli when --size is set/
+  );
+});

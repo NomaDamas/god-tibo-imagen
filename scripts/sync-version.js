@@ -15,6 +15,20 @@ async function main() {
   packageJson.version = version;
   await fs.writeFile(packageJsonPath, JSON.stringify(packageJson, null, 2) + '\n');
 
+  const packageLockPath = path.join(root, 'package-lock.json');
+  try {
+    const packageLock = JSON.parse(await fs.readFile(packageLockPath, 'utf8'));
+    packageLock.version = version;
+    if (packageLock.packages?.['']) {
+      packageLock.packages[''].version = version;
+    }
+    await fs.writeFile(packageLockPath, JSON.stringify(packageLock, null, 2) + '\n');
+  } catch (error) {
+    if (error.code !== 'ENOENT') {
+      throw error;
+    }
+  }
+
   const pyprojectPath = path.join(root, 'python', 'pyproject.toml');
   try {
     let pyproject = await fs.readFile(pyprojectPath, 'utf8');
@@ -26,7 +40,7 @@ async function main() {
     }
   }
 
-  console.log(`Synced version ${version} to package.json and pyproject.toml`);
+  console.log(`Synced version ${version} to package.json, package-lock.json, and pyproject.toml`);
 }
 
 main().catch((error) => {

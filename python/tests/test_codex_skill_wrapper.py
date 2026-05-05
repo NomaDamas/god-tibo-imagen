@@ -34,7 +34,7 @@ def test_wrapper_imports_gti():
     assert "from gti.client import Client" in source or "from gti import Client" in source or "import gti" in source, "wrapper should import gti"
 
 
-def test_wrapper_dry_run_does_not_require_auth(tmp_path, monkeypatch):
+def test_wrapper_dry_run_does_not_require_auth(tmp_path, monkeypatch, capsys):
     auth_file = tmp_path / "auth.json"
     installation_file = tmp_path / "installation_id"
     auth_file.write_text(
@@ -81,6 +81,10 @@ def test_wrapper_dry_run_does_not_require_auth(tmp_path, monkeypatch):
         with pytest.raises(SystemExit) as exc_info:
             runpy.run_path(str(WRAPPER_PATH), run_name="__main__")
         assert exc_info.value.code == 0, "wrapper should exit with code 0 on success"
+        output = json.loads(capsys.readouterr().out)
+        assert output["mode"] == "dry-run"
+        assert output["request"] == {}
+        assert output["response"] == {}
 
 
 def test_wrapper_skills_md_has_valid_frontmatter():
@@ -90,3 +94,9 @@ def test_wrapper_skills_md_has_valid_frontmatter():
     assert "name:" in content, "SKILL.md should have a name field"
     assert "description:" in content, "SKILL.md should have a description field"
     assert "# " in content, "SKILL.md should contain markdown headers"
+
+
+def test_openai_yaml_disables_broad_implicit_invocation():
+    openai_yaml = SKILL_DIR / "agents" / "openai.yaml"
+    content = openai_yaml.read_text(encoding="utf-8")
+    assert "allow_implicit_invocation: false" in content
