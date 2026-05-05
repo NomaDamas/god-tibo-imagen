@@ -9,48 +9,93 @@ on:
         type: string
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   bump-version:
     name: bump-version
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      RELEASE_VERSION: ${{ inputs.version }}
     steps:
-      - name: Check out repository
+      - name: Validate release input
+        run: |
+          set -euo pipefail
+          if [[ "${{ github.ref_name }}" != "main" ]]; then
+            echo "Release workflow must be dispatched from main, got ${{ github.ref_name }}" >&2
+            exit 1
+          fi
+          if [[ ! "$RELEASE_VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+([.-][0-9A-Za-z.-]+)?$ ]]; then
+            echo "Invalid release version: $RELEASE_VERSION" >&2
+            exit 1
+          fi
+          if git ls-remote --exit-code --tags origin "refs/tags/v${RELEASE_VERSION}" >/dev/null 2>&1; then
+            echo "Tag v${RELEASE_VERSION} already exists" >&2
+            exit 1
+          fi
+
+      - name: Check out main
         uses: actions/checkout@v4
         with:
+          ref: main
           token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
       - name: Configure git
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Bump version
+      - name: Bump version and run release preflight
         run: |
-          echo "${{ inputs.version }}" > VERSION
+          set -euo pipefail
+          printf '%s\n' "$RELEASE_VERSION" > VERSION
           node scripts/sync-version.js
+          npm install --package-lock-only
           npm ci
+          npm test
+          npm run check
           npm run build:types
+          python -m pip install --upgrade pip build
+          python -m pip install -e './python[dev]'
+          python -m pytest python/tests
+          (cd python && python -m build)
 
       - name: Commit, push, and tag
         run: |
+          set -euo pipefail
           git add -A
-          git commit -m "chore: release v${{ inputs.version }}"
-          git push origin main
-          git tag "v${{ inputs.version }}"
-          git push origin "v${{ inputs.version }}"
+          git commit \
+            -m "Release because package registries need synchronized version metadata" \
+            -m "Constraint: workflow_dispatch version input is validated before repository mutation" \
+            -m "Confidence: high" \
+            -m "Scope-risk: narrow" \
+            -m "Directive: Dispatch releases from main only; do not publish from dev or feature refs" \
+            -m "Tested: npm test; npm run check; npm run build:types; python -m pytest python/tests; python -m build" \
+            -m "Not-tested: registry publish dry-run"
+          git tag "v${RELEASE_VERSION}"
+          git push origin HEAD:main
+          git push origin "v${RELEASE_VERSION}"
 
   publish-npm:
     name: publish-npm
     runs-on: ubuntu-latest
     needs:
       - bump-version
+    permissions:
+      contents: read
     steps:
       - name: Check out repository at tag
         uses: actions/checkout@v4
@@ -80,6 +125,8 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       - bump-version
+    permissions:
+      contents: read
     steps:
       - name: Check out repository at tag
         uses: actions/checkout@v4

@@ -62,6 +62,62 @@ test('buildResponsesRequest appends input_image when images are provided', () =>
   assert.equal(content[2].image_url, 'data:image/png;base64,def');
 });
 
+test('buildResponsesRequest forwards size into the image_generation tool config', () => {
+  const request = buildResponsesRequest({
+    baseUrl: 'https://chatgpt.com/backend-api/codex',
+    session: {
+      accessToken: 'abc123',
+      accountId: 'acct-123',
+      installationId: null
+    },
+    prompt: 'a banana sticker',
+    model: 'gpt-5.4',
+    originator: 'codex_cli_rs',
+    size: '1536x1024'
+  });
+
+  assert.deepEqual(request.body.tools, [{
+    type: 'image_generation',
+    output_format: 'png',
+    size: '1536x1024'
+  }]);
+});
+
+test('buildResponsesRequest rejects unsupported image size values', () => {
+  assert.throws(
+    () => buildResponsesRequest({
+      baseUrl: 'https://chatgpt.com/backend-api/codex',
+      session: {
+        accessToken: 'abc123',
+        accountId: 'acct-123',
+        installationId: null
+      },
+      prompt: 'a banana sticker',
+      model: 'gpt-5.4',
+      originator: 'codex_cli_rs',
+      size: '999x999'
+    }),
+    /Unsupported image size/
+  );
+});
+
+test('buildResponsesRequest omits size key when size is not provided (back-compat)', () => {
+  const request = buildResponsesRequest({
+    baseUrl: 'https://chatgpt.com/backend-api/codex',
+    session: {
+      accessToken: 'abc123',
+      accountId: 'acct-123',
+      installationId: null
+    },
+    prompt: 'a banana sticker',
+    model: 'gpt-5.4',
+    originator: 'codex_cli_rs'
+  });
+
+  assert.deepEqual(request.body.tools, [{ type: 'image_generation', output_format: 'png' }]);
+  assert.equal(Object.prototype.hasOwnProperty.call(request.body.tools[0], 'size'), false);
+});
+
 test('sanitizeRequestBody redacts input_image.image_url', () => {
   const body = {
     input: [

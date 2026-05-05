@@ -90,6 +90,23 @@ gti --prompt "Combine these two styles" --image ./style-a.png --image ./style-b.
 
 Supported formats: `png`, `jpg`/`jpeg`, `gif`, `webp`.
 
+### Output size
+
+Pass `--size <value>` to control the output image dimensions. Supported values match the gpt-image-2 spec:
+
+```bash
+gti --prompt "a sunset over mountains" --size 1536x1024 --output ./sunset.png
+```
+
+Supported sizes:
+
+- `auto` (model decides)
+- `1024x1024`, `2048x2048` (square)
+- `1536x1024`, `2048x1152`, `3840x2160` (landscape)
+- `1024x1536`, `2160x3840` (portrait)
+
+The `--size` flag is forwarded to the `image_generation` tool config and is honored by the private Codex backend. The `codex-cli` provider does not support `--size`; direct `codex-cli` use and `auto` fallback fail fast rather than silently ignoring requested dimensions.
+
 ### Provider modes
 
 ```bash
@@ -143,6 +160,14 @@ const result = await provider.generateImage({
   model: 'gpt-5.4',
   outputPath: './cat-hat.png',
   images: ['data:image/png;base64,iVBORw0KGgo...']
+});
+
+// with output size
+const result = await provider.generateImage({
+  prompt: 'a sunset over mountains',
+  model: 'gpt-5.4',
+  outputPath: './sunset.png',
+  size: '1536x1024'
 });
 
 // multiple images
@@ -243,6 +268,33 @@ result = client.generate_image(
 )
 print(result.saved_path)
 ```
+
+## Codex Skill Example
+
+For users who want to invoke `god-tibo-imagen` from within Codex, an example skill and wrapper script are provided in `examples/codex-skill/`.
+
+### Setup
+
+- Python 3.10+
+- `pip install god-tibo-imagen` (the import name is `gti`, not `god_tibo_imagen`)
+- Local Codex auth in `~/.codex/auth.json` with `auth_mode = chatgpt`
+
+### Wrapper script
+
+```bash
+# Dry run
+python examples/codex-skill-wrapper.py --prompt "flat blue square icon" --output ./test.png --dry-run
+
+# Live generation
+python examples/codex-skill-wrapper.py --prompt "flat blue square icon" --output ./out.png
+
+# With image inputs
+python examples/codex-skill-wrapper.py --prompt "Make this cat wear a hat" --image ./cat.png --output ./cat-hat.png
+```
+
+### Skill file
+
+The Codex skill definition is at `examples/codex-skill/SKILL.md`. You can copy this directory into your Codex skills path (e.g., `~/.codex/skills/god-tibo-imagen/`) for easier invocation.
 
 ## Key files
 

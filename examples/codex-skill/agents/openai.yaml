@@ -1,0 +1,8 @@
+interface:
+  display_name: "god-tibo-imagen"
+  short_description: "Generate images via the god-tibo-imagen Python SDK"
+  brand_color: "#3B82F6"
+  default_prompt: "Generate an image of a sunset over mountains using god-tibo-imagen"
+
+policy:
+  allow_implicit_invocation: false

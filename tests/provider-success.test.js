@@ -83,6 +83,42 @@ test('private provider forwards image data URL to request builder', async () => 
   assert.equal(result.savedPath, outputPath);
 });
 
+test('private provider forwards output size to request builder', async () => {
+  const dir = await makeTempDir();
+  const fixture = await writeAuthFixture(dir);
+  const outputPath = path.join(dir, 'out.png');
+  const successSse = await fs.readFile(path.join(fixturesDir.pathname, 'success.sse'), 'utf8');
+
+  const provider = createPrivateCodexProvider({
+    baseUrl: 'https://chatgpt.com/backend-api/codex',
+    authFile: fixture.authPath,
+    installationIdFile: fixture.installationIdPath,
+    defaultOriginator: 'codex_cli_rs'
+  });
+
+  const result = await provider.generateImage({
+    prompt: 'make a blue square',
+    model: 'gpt-5.4',
+    outputPath,
+    size: '1536x1024',
+    fetchImpl: async (_url, options) => {
+      const body = JSON.parse(options.body);
+      assert.equal(body.tools[0].size, '1536x1024');
+      return createFetchResponse({
+        ok: true,
+        status: 200,
+        body: successSse,
+        headers: {
+          'content-type': 'text/event-stream',
+          'x-oai-request-id': 'req-790'
+        }
+      });
+    }
+  });
+
+  assert.equal(result.savedPath, outputPath);
+});
+
 test('private provider redacts secrets in debug dumps', async () => {
   const dir = await makeTempDir();
   const fixture = await writeAuthFixture(dir);

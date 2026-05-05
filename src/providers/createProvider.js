@@ -29,6 +29,12 @@ export function createProvider(config) {
             const result = await privateProvider.generateImage(args);
             return { ...result, provider: PRIVATE_CODEX_PROVIDER };
           } catch (privateError) {
+            if (args?.size) {
+              const error = new Error('The auto provider cannot fall back to codex-cli when --size is set because codex-cli cannot honor output dimensions.');
+              error.code = 'SIZE_UNSUPPORTED_BY_FALLBACK';
+              error.cause = privateError;
+              throw error;
+            }
             const cliResult = await cliProvider.generateImage(args);
             return {
               ...cliResult,
