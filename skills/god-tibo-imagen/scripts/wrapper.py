@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
-"""Codex skill wrapper for god-tibo-imagen.
+"""Agent-skill wrapper for god-tibo-imagen.
 
 A lightweight CLI wrapper around the god-tibo-imagen Python SDK designed
-for invocation from Codex skills or direct command-line usage.
+for invocation from any coding agent that supports the Agent Skills format
+(Claude Code, Codex, Cursor, OpenCode, Continue, Gemini CLI, etc.) as well
+as direct command-line usage.
 
 Example:
-    python codex-skill-wrapper.py --prompt "flat blue square" --output ./out.png --dry-run
+    python wrapper.py --prompt "flat blue square" --output ./out.png --dry-run
 """
 
 from __future__ import annotations

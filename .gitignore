@@ -3,6 +3,13 @@ smoke-output.png
 generated-*.png
 duck-surf-cool.png
 
+# Test/scratch image artifacts at repo root
+/out.png
+/codex-cli-out.png
+/cute-test.png
+/test-node-*.png
+/test-py-*.png
+
 # Node
 node_modules/
 dist/
