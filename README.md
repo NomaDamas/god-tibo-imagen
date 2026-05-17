@@ -278,9 +278,9 @@ result = client.generate_image(
 print(result.saved_path)
 ```
 
-## Codex Skill Example
+## Agent Skill (cross-agent)
 
-For users who want to invoke `god-tibo-imagen` from within Codex, an example skill and wrapper script are provided in `examples/codex-skill/`.
+For users who want to invoke `god-tibo-imagen` from within any coding agent that supports the [Agent Skills](https://agentskills.io/specification) format (Claude Code, Codex, Cursor, OpenCode, Continue, Gemini CLI, etc.), a portable skill is provided in `skills/god-tibo-imagen/`.
 
 ### Setup
 
@@ -292,18 +292,31 @@ For users who want to invoke `god-tibo-imagen` from within Codex, an example ski
 
 ```bash
 # Dry run
-python examples/codex-skill-wrapper.py --prompt "flat blue square icon" --output ./test.png --dry-run
+python skills/god-tibo-imagen/scripts/wrapper.py --prompt "flat blue square icon" --output ./test.png --dry-run
 
 # Live generation
-python examples/codex-skill-wrapper.py --prompt "flat blue square icon" --output ./out.png
+python skills/god-tibo-imagen/scripts/wrapper.py --prompt "flat blue square icon" --output ./out.png
 
 # With image inputs
-python examples/codex-skill-wrapper.py --prompt "Make this cat wear a hat" --image ./cat.png --output ./cat-hat.png
+python skills/god-tibo-imagen/scripts/wrapper.py --prompt "Make this cat wear a hat" --image ./cat.png --output ./cat-hat.png
 ```
 
 ### Skill file
 
-The Codex skill definition is at `examples/codex-skill/SKILL.md`. You can copy this directory into your Codex skills path (e.g., `~/.codex/skills/god-tibo-imagen/`) for easier invocation.
+The skill definition is at `skills/god-tibo-imagen/SKILL.md`. Install it by copying or symlinking the `skills/god-tibo-imagen/` directory into your agent's skills path:
+
+- Claude Code: `~/.claude/skills/god-tibo-imagen/`
+- Codex: `~/.codex/skills/god-tibo-imagen/` (or project-local `.agents/skills/god-tibo-imagen/`)
+- OpenCode: `~/.config/opencode/skills/god-tibo-imagen/`
+- Cursor / Continue / Gemini CLI / Kiro: `.agents/skills/god-tibo-imagen/` (project)
+
+Or use the Vercel `skills` CLI:
+
+```bash
+npx skills add NomaDamas/god-tibo-imagen --skill god-tibo-imagen
+```
+
+See `skills/god-tibo-imagen/README.md` for detailed installation per agent.
 
 ## Key files
 
