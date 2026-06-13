@@ -2,6 +2,7 @@
 // @ts-nocheck
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 import { resolveConfig, UNSUPPORTED_WARNING } from '../config.js';
 import { createProvider } from '../providers/createProvider.js';
@@ -30,7 +31,8 @@ function parseArgs(argv) {
     provider: null,
     images: [],
     size: null,
-    help: false
+    help: false,
+    version: false
   };
 
   for (let index = 0; index < argv.length; index += 1) {
@@ -92,6 +94,10 @@ function parseArgs(argv) {
       case '-h':
         parsed.help = true;
         break;
+      case '--version':
+      case '-v':
+        parsed.version = true;
+        break;
       default:
         if (!token.startsWith('-') && !parsed.prompt) {
           parsed.prompt = token;
@@ -128,6 +134,15 @@ async function readImageAsDataUrl(imagePath) {
   return `data:${mime};base64,${buffer.toString('base64')}`;
 }
 
+async function readVersion() {
+  const versionPath = path.resolve(fileURLToPath(import.meta.url), '..', '..', '..', 'VERSION');
+  try {
+    return (await fs.readFile(versionPath, 'utf8')).trim();
+  } catch {
+    return '0.0.0';
+  }
+}
+
 function printHelp() {
   console.log(`
 ${UNSUPPORTED_WARNING}
@@ -151,11 +166,16 @@ Options:
   --installation-id-file <path> Override installation_id path
   --base-url <url>              Override private Codex base URL
   -h, --help                    Show help
+  -v, --version                 Print the gti version and exit
 `);
 }
 
 async function main() {
   const args = parseArgs(process.argv.slice(2));
+  if (args.version) {
+    console.log(await readVersion());
+    return;
+  }
   if (args.help || !args.prompt) {
     printHelp();
     if (!args.prompt && !args.help) {
