@@ -44,6 +44,11 @@
     { "zoneId": "09", "slug": "laundry-hound" },
     { "zoneId": "09", "slug": "hanger-bat" },
     { "zoneId": "09", "slug": "dorm-manager" },
-    { "zoneId": "09", "slug": "wardrobe-keeper" }
+    { "zoneId": "09", "slug": "wardrobe-keeper" },
+    { "zoneId": "10", "slug": "balloon-sprout" },
+    { "zoneId": "10", "slug": "parade-hound" },
+    { "zoneId": "10", "slug": "confetti-kite" },
+    { "zoneId": "10", "slug": "stage-helper" },
+    { "zoneId": "10", "slug": "carousel-brute" }
   ]
 }
