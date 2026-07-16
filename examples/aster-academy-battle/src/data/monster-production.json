@@ -34,6 +34,11 @@
     { "zoneId": "07", "slug": "rail-hound" },
     { "zoneId": "07", "slug": "route-drone" },
     { "zoneId": "07", "slug": "gate-attendant" },
-    { "zoneId": "07", "slug": "transit-loader" }
+    { "zoneId": "07", "slug": "transit-loader" },
+    { "zoneId": "08", "slug": "tray-blob" },
+    { "zoneId": "08", "slug": "toaster-pup" },
+    { "zoneId": "08", "slug": "cup-drone" },
+    { "zoneId": "08", "slug": "kitchen-server" },
+    { "zoneId": "08", "slug": "boiler-chef" }
   ]
 }
