@@ -24,6 +24,11 @@
     { "zoneId": "05", "slug": "sprinkler-gecko" },
     { "zoneId": "05", "slug": "pollen-bee" },
     { "zoneId": "05", "slug": "greenhouse-keeper" },
-    { "zoneId": "05", "slug": "canopy-titan" }
+    { "zoneId": "05", "slug": "canopy-titan" },
+    { "zoneId": "06", "slug": "battery-spark" },
+    { "zoneId": "06", "slug": "panel-ram" },
+    { "zoneId": "06", "slug": "turbine-kite" },
+    { "zoneId": "06", "slug": "grid-technician" },
+    { "zoneId": "06", "slug": "rooftop-transformer" }
   ]
 }
