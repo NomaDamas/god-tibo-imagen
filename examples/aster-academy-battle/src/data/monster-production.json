@@ -19,6 +19,11 @@
     { "zoneId": "04", "slug": "cable-ferret" },
     { "zoneId": "04", "slug": "sensor-wasp" },
     { "zoneId": "04", "slug": "lab-assistant" },
-    { "zoneId": "04", "slug": "reactor-frame" }
+    { "zoneId": "04", "slug": "reactor-frame" },
+    { "zoneId": "05", "slug": "seedling-pod" },
+    { "zoneId": "05", "slug": "sprinkler-gecko" },
+    { "zoneId": "05", "slug": "pollen-bee" },
+    { "zoneId": "05", "slug": "greenhouse-keeper" },
+    { "zoneId": "05", "slug": "canopy-titan" }
   ]
 }

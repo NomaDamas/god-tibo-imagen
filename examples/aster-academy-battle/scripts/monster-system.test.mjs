@@ -31,7 +31,7 @@ test("production manifest selects completed archetypes and all four tiers", () =
   );
 });
 
-test("production manifest contains four complete five-family zones", async () => {
+test("production manifest contains five complete five-family zones", async () => {
   const production = JSON.parse(
     await readFile(new URL("../src/data/monster-production.json", import.meta.url), "utf8"),
   );
@@ -56,13 +56,18 @@ test("production manifest contains four complete five-family zones", async () =>
     { zoneId: "04", slug: "sensor-wasp" },
     { zoneId: "04", slug: "lab-assistant" },
     { zoneId: "04", slug: "reactor-frame" },
+    { zoneId: "05", slug: "seedling-pod" },
+    { zoneId: "05", slug: "sprinkler-gecko" },
+    { zoneId: "05", slug: "pollen-bee" },
+    { zoneId: "05", slug: "greenhouse-keeper" },
+    { zoneId: "05", slug: "canopy-titan" },
   ]);
 
   const catalog = JSON.parse(
     await readFile(new URL("../src/data/monster-catalog.json", import.meta.url), "utf8"),
   );
   const produced = getProducedMonsters(catalog, production);
-  assert.equal(produced.length, 80);
+  assert.equal(produced.length, 100);
   for (const { zoneId, slug } of production.archetypes) {
     assert.equal(
       produced.filter((monster) => monster.zoneId === zoneId && monster.slug === slug).length,
