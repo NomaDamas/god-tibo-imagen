@@ -1,0 +1,11 @@
+{
+  "units": [
+    { "id": "seoha", "label": "서하", "kind": "hero", "asset": "/assets/heroes/seoha.png", "portrait": "/assets/portraits/seoha.png", "x": 23, "y": 57, "width": 8.8, "facing": 1, "motion": "runner", "health": 92 },
+    { "id": "rumi", "label": "루미", "kind": "hero", "asset": "/assets/heroes/rumi.png", "portrait": "/assets/portraits/rumi.png", "x": 31, "y": 44, "width": 8.4, "facing": 1, "motion": "runner", "health": 84 },
+    { "id": "iden", "label": "이든", "kind": "hero", "asset": "/assets/heroes/iden.png", "portrait": "/assets/portraits/iden.png", "x": 16, "y": 46, "width": 8.4, "facing": 1, "motion": "runner", "health": 96 },
+    { "id": "nari", "label": "나리", "kind": "hero", "asset": "/assets/heroes/nari.png", "portrait": "/assets/portraits/nari.png", "x": 30, "y": 68, "width": 9.2, "facing": 1, "motion": "heavy", "health": 100 },
+    { "id": "orb-drone", "label": "정비 드론", "kind": "enemy", "asset": "/assets/enemies/orb-drone.png", "x": 62, "y": 35, "width": 6.2, "facing": -1, "motion": "hover", "health": 73 },
+    { "id": "scout-drone", "label": "정찰 드론", "kind": "enemy", "asset": "/assets/enemies/scout-drone.png", "x": 71, "y": 38, "width": 6.6, "facing": -1, "motion": "hover", "health": 58 },
+    { "id": "training-robot", "label": "훈련 로봇", "kind": "enemy", "asset": "/assets/enemies/training-robot.png", "x": 81, "y": 46, "width": 8.8, "facing": -1, "motion": "heavy", "health": 86 }
+  ]
+}

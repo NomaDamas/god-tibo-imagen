@@ -31,3 +31,7 @@ dist/
 .idea/
 .vscode/
 *.swp
+
+# Local product-design reference downloads
+/tmp/
+.npm-cache/

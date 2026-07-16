@@ -1,0 +1,14 @@
+:root {
+  font-family: "Noto Sans KR", system-ui, sans-serif;
+  color: #173358;
+  background: #eaf6ff;
+  font-synthesis: none;
+  --cyan: #16c7ee;
+  --cyan-dark: #079fd2;
+  --blue: #227dff;
+  --navy: #173358;
+  --yellow: #ffd249;
+  --white: #ffffff;
+  --panel: rgba(255, 255, 255, 0.92);
+  --line: rgba(41, 132, 190, 0.25);
+}

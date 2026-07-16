@@ -1,0 +1,334 @@
+.prototype-stage {
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  background: #d8effc;
+}
+
+.game-shell {
+  position: relative;
+  width: min(calc(100vw - 32px), 844px);
+  aspect-ratio: 844 / 390;
+  overflow: hidden;
+  background: #dff4ff;
+  box-shadow: 0 20px 70px rgba(24, 86, 126, 0.28);
+  isolation: isolate;
+}
+
+.battlefield,
+.battlefield__background,
+.battlefield__wash,
+.battlefield__units,
+.hud {
+  position: absolute;
+  inset: 0;
+}
+
+.battlefield__background {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  user-select: none;
+}
+
+.battlefield__wash {
+  background: rgba(180, 229, 255, 0.06);
+  pointer-events: none;
+}
+
+.unit {
+  position: absolute;
+  left: var(--unit-x);
+  top: var(--unit-y);
+  width: var(--unit-width);
+  transform: translate(-50%, -100%) scaleX(var(--unit-facing));
+  transform-origin: 50% 100%;
+  animation-duration: var(--motion-speed);
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  z-index: calc(20 + var(--unit-depth));
+}
+
+.unit img {
+  display: block;
+  width: 100%;
+  filter: drop-shadow(0 5px 3px rgba(28, 75, 104, 0.24));
+}
+
+.unit__health {
+  position: absolute;
+  left: 12%;
+  right: 12%;
+  top: -8%;
+  height: 4px;
+  overflow: hidden;
+  border: 1px solid white;
+  border-radius: 10px;
+  background: rgba(23,51,88,.55);
+  transform: scaleX(var(--unit-facing));
+}
+
+.unit__health span {
+  display: block;
+  height: 100%;
+  background: #80e35e;
+}
+
+.unit--enemy .unit__health span {
+  background: #ff6170;
+}
+
+.motion--runner { animation-name: runner-bob; }
+.motion--hover { animation-name: hover; }
+.motion--heavy { animation-name: heavy-shift; }
+
+.is-paused .unit,
+.is-paused .projectile,
+.is-paused .hit-effect,
+.is-paused .skill-effect {
+  animation-play-state: paused;
+}
+
+@keyframes runner-bob {
+  0%, 100% { margin-top: 0; }
+  50% { margin-top: -4px; }
+}
+
+@keyframes hover {
+  0%, 100% { margin-top: 0; }
+  50% { margin-top: -7px; }
+}
+
+@keyframes heavy-shift {
+  0%, 100% { rotate: -1deg; }
+  50% { rotate: 1deg; }
+}
+
+.hud {
+  pointer-events: none;
+  z-index: 200;
+}
+
+.hud button { pointer-events: auto; }
+
+.mission-banner {
+  position: absolute;
+  top: 3.5%;
+  left: 2.5%;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  min-width: 172px;
+  padding: 9px 24px 9px 30px;
+  color: var(--navy);
+  background: var(--panel);
+  clip-path: polygon(10px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);
+  border-left: 9px solid var(--cyan);
+  box-shadow: 0 5px 16px rgba(25,88,132,.12);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.mission-banner strong { font-size: 17px; }
+
+.battle-controls {
+  position: absolute;
+  top: 3.5%;
+  right: 2.5%;
+  display: flex;
+  gap: 6px;
+}
+
+.battle-controls > * {
+  min-width: 44px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  color: var(--navy);
+  background: var(--panel);
+  box-shadow: 0 5px 15px rgba(25,88,132,.12);
+}
+
+.battle-controls button {
+  cursor: pointer;
+  color: white;
+  background: var(--cyan);
+  font-weight: 700;
+}
+
+.battle-controls svg { width: 17px; }
+.timer { min-width: 76px; font-weight: 700; }
+
+.reward-chip {
+  position: absolute;
+  left: 2.8%;
+  bottom: 6%;
+  min-width: 184px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 20px;
+  border: 0;
+  color: var(--navy);
+  background: var(--panel);
+  clip-path: polygon(12px 0, 100% 0, calc(100% - 14px) 100%, 0 100%);
+  box-shadow: 0 6px 18px rgba(25,88,132,.14);
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.reward-chip svg { width: 21px; color: var(--cyan-dark); }
+.reward-chip.is-open { min-width: 234px; }
+
+.combat-deck {
+  position: absolute;
+  right: 10.6%;
+  bottom: 3.2%;
+  width: 264px;
+  height: 90px;
+}
+
+.skill-deck {
+  position: absolute;
+  right: 0;
+  bottom: 17px;
+  display: flex;
+  gap: 5px;
+}
+
+.skill-card {
+  position: relative;
+  width: 66px;
+  height: 66px;
+  padding: 0;
+  overflow: hidden;
+  border: 3px solid white;
+  background: #c9effb;
+  clip-path: polygon(12px 0, 100% 0, calc(100% - 9px) 100%, 0 100%);
+  box-shadow: 0 4px 12px rgba(22,91,138,.28);
+  cursor: pointer;
+  transition: translate .15s ease, filter .15s ease;
+}
+
+.skill-card:hover:not(:disabled) { translate: 0 -4px; }
+.skill-card:disabled { filter: grayscale(.8); opacity: .55; cursor: not-allowed; }
+.skill-card img { width: 100%; height: 100%; object-fit: cover; }
+
+.skill-card__cost {
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  width: 20px;
+  height: 20px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: white;
+  background: var(--navy);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.cost-badge {
+  position: absolute;
+  left: 0;
+  bottom: 23px;
+  width: 50px;
+  height: 50px;
+  display: grid;
+  place-items: center;
+  color: white;
+  background: var(--navy);
+  clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%);
+}
+
+.cost-badge small { font-size: 7px; margin-bottom: -8px; }
+.cost-badge strong { font-size: 18px; }
+
+.cost-gauge {
+  position: absolute;
+  left: 54px;
+  right: 0;
+  bottom: 4px;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 3px;
+}
+
+.cost-gauge span {
+  height: 8px;
+  background: rgba(23,51,88,.48);
+  transform: skewX(-16deg);
+}
+
+.cost-gauge span.is-filled { background: var(--cyan); }
+
+.auto-toggle {
+  position: absolute;
+  right: 2.5%;
+  bottom: 7%;
+  width: 70px;
+  height: 44px;
+  border: 2px solid white;
+  color: rgba(23,51,88,.55);
+  background: rgba(255,255,255,.84);
+  clip-path: polygon(9px 0, 100% 0, calc(100% - 9px) 100%, 0 100%);
+  cursor: pointer;
+  font-weight: 700;
+  letter-spacing: .04em;
+}
+
+.auto-toggle.is-active {
+  color: white;
+  background: var(--cyan);
+  box-shadow: 0 0 20px rgba(22,199,238,.48);
+}
+
+.projectile,
+.hit-effect,
+.skill-effect,
+.damage-number {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 180;
+}
+
+.projectile { left: 37%; top: 44%; width: 7%; }
+.projectile img,
+.hit-effect img,
+.skill-effect img { width: 100%; }
+.projectile.is-active { animation: projectile-flight .7s ease-in forwards; }
+.hit-effect { left: 67%; top: 31%; width: 8%; }
+.hit-effect.is-active { animation: effect-pop .55s .4s ease-out forwards; }
+.skill-effect { left: 18%; top: 30%; width: 16%; }
+.skill-effect.is-active { animation: effect-pop .6s ease-out forwards; }
+.damage-number { left: 68%; top: 27%; color: #ff9d25; font-size: 14px; font-weight: 700; text-shadow: 0 1px 0 white; }
+.damage-number.is-active { animation: damage-rise .7s .4s ease-out forwards; }
+
+@keyframes projectile-flight {
+  0% { opacity: 0; translate: 0 24px; }
+  15% { opacity: 1; }
+  100% { opacity: 1; translate: 270px -30px; }
+}
+
+@keyframes effect-pop {
+  0% { opacity: 0; scale: .35; }
+  35% { opacity: 1; scale: 1.15; }
+  100% { opacity: 0; scale: 1.45; }
+}
+
+@keyframes damage-rise {
+  0% { opacity: 0; translate: 0 8px; }
+  30% { opacity: 1; }
+  100% { opacity: 0; translate: 0 -22px; }
+}
+
+@media (max-width: 700px) {
+  .prototype-stage { padding: 0; align-items: start; }
+  .game-shell { width: 100vw; }
+}
