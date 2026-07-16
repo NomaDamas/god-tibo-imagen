@@ -39,6 +39,11 @@
     { "zoneId": "08", "slug": "toaster-pup" },
     { "zoneId": "08", "slug": "cup-drone" },
     { "zoneId": "08", "slug": "kitchen-server" },
-    { "zoneId": "08", "slug": "boiler-chef" }
+    { "zoneId": "08", "slug": "boiler-chef" },
+    { "zoneId": "09", "slug": "dust-bunny" },
+    { "zoneId": "09", "slug": "laundry-hound" },
+    { "zoneId": "09", "slug": "hanger-bat" },
+    { "zoneId": "09", "slug": "dorm-manager" },
+    { "zoneId": "09", "slug": "wardrobe-keeper" }
   ]
 }
