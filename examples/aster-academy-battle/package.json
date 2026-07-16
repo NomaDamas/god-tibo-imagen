@@ -7,6 +7,11 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
+    "build:monster-catalog": "node scripts/build-monster-catalog.mjs",
+    "test:monsters": "node --test scripts/monster-system.test.mjs",
+    "verify:monster-catalog": "node scripts/verify-monster-catalog.mjs",
+    "verify:monster-assets": "node scripts/verify-monster-assets.mjs",
+    "verify:monsters": "npm run build:monster-catalog && npm run verify:monster-catalog && npm run test:monsters && npm run verify:monster-assets",
     "verify:assets": "node scripts/verify-assets.mjs"
   },
   "dependencies": {
@@ -16,5 +21,8 @@
     "react": "19.2.0",
     "react-dom": "19.2.0",
     "vite": "6.4.2"
+  },
+  "devDependencies": {
+    "pngjs": "^7.0.0"
   }
 }

@@ -1,0 +1,144 @@
+.monster-actor {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: end center;
+  transform-origin: 50% 88%;
+  scale: var(--monster-scale);
+}
+
+.monster-actor img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transform-origin: 50% 88%;
+  filter: drop-shadow(0 7px 4px rgba(36, 79, 112, 0.24));
+  animation-duration: var(--monster-duration);
+  animation-fill-mode: both;
+  animation-timing-function: ease-in-out;
+}
+
+.state--idle img,
+.state--move img { animation-iteration-count: infinite; }
+.profile--bob.state--idle img { animation-name: monster-bob-idle; }
+.profile--runner.state--idle img { animation-name: monster-runner-idle; }
+.profile--hover.state--idle img { animation-name: monster-hover-idle; }
+.profile--caster.state--idle img { animation-name: monster-caster-idle; }
+.profile--heavy.state--idle img { animation-name: monster-heavy-idle; }
+.profile--bob.state--move img { animation-name: monster-bob-move; }
+.profile--runner.state--move img { animation-name: monster-runner-move; }
+.profile--hover.state--move img { animation-name: monster-hover-move; }
+.profile--caster.state--move img { animation-name: monster-caster-move; }
+.profile--heavy.state--move img { animation-name: monster-heavy-move; }
+.profile--bob.state--attack img { animation-name: monster-bob-attack; }
+.profile--runner.state--attack img { animation-name: monster-runner-attack; }
+.profile--hover.state--attack img { animation-name: monster-hover-attack; }
+.profile--caster.state--attack img { animation-name: monster-caster-attack; }
+.profile--heavy.state--attack img { animation-name: monster-heavy-attack; }
+.state--hit img { animation-name: monster-hit; }
+.state--death img { animation-name: monster-death; }
+.monster-actor.is-paused img { animation-play-state: paused; }
+
+@keyframes monster-bob-idle {
+  0%, 100% { translate: 0 0; rotate: -1deg; }
+  50% { translate: 0 -5%; rotate: 1deg; }
+}
+
+@keyframes monster-runner-idle {
+  0%, 100% { translate: 0 0; rotate: -1.5deg; }
+  50% { translate: 0 -2%; rotate: 1.5deg; }
+}
+
+@keyframes monster-hover-idle {
+  0%, 100% { translate: 0 3%; rotate: -1deg; }
+  50% { translate: 0 -5%; rotate: 1deg; }
+}
+
+@keyframes monster-caster-idle {
+  0%, 100% { scale: 1; }
+  50% { scale: 1.025; }
+}
+
+@keyframes monster-heavy-idle {
+  0%, 100% { translate: 0 0; rotate: -.6deg; }
+  50% { translate: 0 -1%; rotate: .6deg; }
+}
+
+@keyframes monster-bob-move {
+  0%, 100% { translate: -3% 0; rotate: -3deg; }
+  50% { translate: 3% -9%; rotate: 3deg; }
+}
+
+@keyframes monster-runner-move {
+  0%, 100% { translate: -5% 0; rotate: -4deg; }
+  50% { translate: 5% -4%; rotate: 4deg; }
+}
+
+@keyframes monster-hover-move {
+  0%, 100% { translate: -7% 2%; rotate: -2deg; }
+  50% { translate: 7% -4%; rotate: 2deg; }
+}
+
+@keyframes monster-caster-move {
+  0%, 100% { translate: -3% 0; }
+  50% { translate: 3% -3%; }
+}
+
+@keyframes monster-heavy-move {
+  0%, 100% { translate: -2% 0; rotate: -1deg; }
+  50% { translate: 2% -1%; rotate: 1deg; }
+}
+
+@keyframes monster-bob-attack {
+  0% { translate: 0 0; rotate: 0; }
+  38% { translate: 5% -8%; rotate: 4deg; }
+  62% { translate: -12% 5%; rotate: -7deg; }
+  100% { translate: 0 0; rotate: 0; }
+}
+
+@keyframes monster-runner-attack {
+  0% { translate: 0 0; rotate: 0; }
+  28% { translate: 10% 0; rotate: 3deg; }
+  58% { translate: -20% 1%; rotate: -4deg; }
+  100% { translate: 0 0; rotate: 0; }
+}
+
+@keyframes monster-hover-attack {
+  0% { translate: 0 0; scale: 1; }
+  35% { translate: 9% -2%; scale: .94; }
+  64% { translate: -8% -1%; scale: 1.05; }
+  100% { translate: 0 0; scale: 1; }
+}
+
+@keyframes monster-caster-attack {
+  0% { translate: 0 0; scale: 1; filter: brightness(1); }
+  55% { translate: 5% -2%; scale: .92; filter: brightness(1.45); }
+  72% { translate: -8% 0; scale: 1.08; filter: brightness(1.8); }
+  100% { translate: 0 0; scale: 1; filter: brightness(1); }
+}
+
+@keyframes monster-heavy-attack {
+  0% { translate: 0 0; rotate: 0; }
+  48% { translate: 9% -7%; rotate: 5deg; }
+  72% { translate: -14% 6%; rotate: -8deg; }
+  100% { translate: 0 0; rotate: 0; }
+}
+
+@keyframes monster-hit {
+  0%, 100% { translate: 0; filter: brightness(1); }
+  25% { translate: -8% 0; filter: brightness(2.4); }
+  55% { translate: 7% 0; filter: brightness(1.7); }
+  78% { translate: -3% 0; filter: brightness(1.2); }
+}
+
+@keyframes monster-death {
+  0% { opacity: 1; translate: 0; rotate: 0; scale: 1; }
+  65% { opacity: .85; translate: 7% 6%; rotate: 12deg; scale: .82; }
+  100% { opacity: 0; translate: 10% 14%; rotate: 18deg; scale: .38; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .state--idle img,
+  .state--move img { animation: none !important; }
+}

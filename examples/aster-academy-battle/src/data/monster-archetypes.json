@@ -1,0 +1,1504 @@
+{
+  "archetypes": [
+    {
+      "archetypeId": "01-01",
+      "slug": "guide-orb",
+      "name": "안내구슬",
+      "role": "mascot",
+      "identity": "길을 잃은 방문객을 끝없이 잘못된 방향으로 안내하는 구형 서비스 로봇",
+      "motionProfile": "bob",
+      "zoneId": "01",
+      "zoneSlug": "central-plaza",
+      "zoneName": "중앙 광장",
+      "palette": [
+        "cyan",
+        "coral"
+      ]
+    },
+    {
+      "archetypeId": "01-02",
+      "slug": "banner-hound",
+      "name": "배너하운드",
+      "role": "quadruped",
+      "identity": "접이식 안내판을 등에 지고 광장을 순찰하는 사족형 장비",
+      "motionProfile": "runner",
+      "zoneId": "01",
+      "zoneSlug": "central-plaza",
+      "zoneName": "중앙 광장",
+      "palette": [
+        "cyan",
+        "coral"
+      ]
+    },
+    {
+      "archetypeId": "01-03",
+      "slug": "patrol-kite",
+      "name": "순찰카이트",
+      "role": "flying",
+      "identity": "얇은 연 모양 날개와 카메라 코어로 군중을 추적하는 순찰기",
+      "motionProfile": "hover",
+      "zoneId": "01",
+      "zoneSlug": "central-plaza",
+      "zoneName": "중앙 광장",
+      "palette": [
+        "cyan",
+        "coral"
+      ]
+    },
+    {
+      "archetypeId": "01-04",
+      "slug": "sign-caretaker",
+      "name": "표지관리인",
+      "role": "humanoid",
+      "identity": "빈 표지판과 스캐너 봉을 든 소형 광장 관리 로봇",
+      "motionProfile": "caster",
+      "zoneId": "01",
+      "zoneSlug": "central-plaza",
+      "zoneName": "중앙 광장",
+      "palette": [
+        "cyan",
+        "coral"
+      ]
+    },
+    {
+      "archetypeId": "01-05",
+      "slug": "plaza-warden",
+      "name": "광장파수기",
+      "role": "heavy",
+      "identity": "분수 제어 코어와 차단벽을 몸에 결합한 중장 경비 장비",
+      "motionProfile": "heavy",
+      "zoneId": "01",
+      "zoneSlug": "central-plaza",
+      "zoneName": "중앙 광장",
+      "palette": [
+        "cyan",
+        "coral"
+      ]
+    },
+    {
+      "archetypeId": "02-01",
+      "slug": "index-mite",
+      "name": "색인진드기",
+      "role": "mascot",
+      "identity": "분류 태그를 먹고 잘못된 색인을 뱉는 작은 검색 장치",
+      "motionProfile": "bob",
+      "zoneId": "02",
+      "zoneSlug": "record-library",
+      "zoneName": "기록 도서관",
+      "palette": [
+        "navy",
+        "mint"
+      ]
+    },
+    {
+      "archetypeId": "02-02",
+      "slug": "shelf-hound",
+      "name": "서가하운드",
+      "role": "quadruped",
+      "identity": "책꽂이형 몸통에 반납 책을 쌓고 달리는 운반 로봇",
+      "motionProfile": "runner",
+      "zoneId": "02",
+      "zoneSlug": "record-library",
+      "zoneName": "기록 도서관",
+      "palette": [
+        "navy",
+        "mint"
+      ]
+    },
+    {
+      "archetypeId": "02-03",
+      "slug": "bookmark-owl",
+      "name": "책갈피올빼미",
+      "role": "flying",
+      "identity": "책갈피 날개와 렌즈 눈으로 미반납 기록을 찾는 비행체",
+      "motionProfile": "hover",
+      "zoneId": "02",
+      "zoneSlug": "record-library",
+      "zoneName": "기록 도서관",
+      "palette": [
+        "navy",
+        "mint"
+      ]
+    },
+    {
+      "archetypeId": "02-04",
+      "slug": "archive-clerk",
+      "name": "기록서기",
+      "role": "humanoid",
+      "identity": "스캔 패드와 도장 장치를 든 무인 기록 관리인",
+      "motionProfile": "caster",
+      "zoneId": "02",
+      "zoneSlug": "record-library",
+      "zoneName": "기록 도서관",
+      "palette": [
+        "navy",
+        "mint"
+      ]
+    },
+    {
+      "archetypeId": "02-05",
+      "slug": "stack-guardian",
+      "name": "서고수호기",
+      "role": "heavy",
+      "identity": "이동식 서가와 방화 셔터가 합쳐진 거대한 보존 장비",
+      "motionProfile": "heavy",
+      "zoneId": "02",
+      "zoneSlug": "record-library",
+      "zoneName": "기록 도서관",
+      "palette": [
+        "navy",
+        "mint"
+      ]
+    },
+    {
+      "archetypeId": "03-01",
+      "slug": "ball-sprite",
+      "name": "공도깨비",
+      "role": "mascot",
+      "identity": "충격 측정 공이 자율 주행을 시작한 작은 훈련 오류체",
+      "motionProfile": "bob",
+      "zoneId": "03",
+      "zoneSlug": "sports-hall",
+      "zoneName": "체육 실습관",
+      "palette": [
+        "orange",
+        "cyan"
+      ]
+    },
+    {
+      "archetypeId": "03-02",
+      "slug": "hurdle-hound",
+      "name": "허들하운드",
+      "role": "quadruped",
+      "identity": "접이식 허들 다리로 빠르게 도약하는 사족형 장비",
+      "motionProfile": "runner",
+      "zoneId": "03",
+      "zoneSlug": "sports-hall",
+      "zoneName": "체육 실습관",
+      "palette": [
+        "orange",
+        "cyan"
+      ]
+    },
+    {
+      "archetypeId": "03-03",
+      "slug": "whistle-drone",
+      "name": "호각드론",
+      "role": "flying",
+      "identity": "과도한 훈련 신호를 뿜는 호각형 심판 드론",
+      "motionProfile": "hover",
+      "zoneId": "03",
+      "zoneSlug": "sports-hall",
+      "zoneName": "체육 실습관",
+      "palette": [
+        "orange",
+        "cyan"
+      ]
+    },
+    {
+      "archetypeId": "03-04",
+      "slug": "drill-coach",
+      "name": "드릴코치",
+      "role": "humanoid",
+      "identity": "전술 보드와 카운터를 든 자동 훈련 교관",
+      "motionProfile": "caster",
+      "zoneId": "03",
+      "zoneSlug": "sports-hall",
+      "zoneName": "체육 실습관",
+      "palette": [
+        "orange",
+        "cyan"
+      ]
+    },
+    {
+      "archetypeId": "03-05",
+      "slug": "scoreboard-golem",
+      "name": "전광판골렘",
+      "role": "heavy",
+      "identity": "대형 점수판과 투척 기계가 결합된 중량 훈련체",
+      "motionProfile": "heavy",
+      "zoneId": "03",
+      "zoneSlug": "sports-hall",
+      "zoneName": "체육 실습관",
+      "palette": [
+        "orange",
+        "cyan"
+      ]
+    },
+    {
+      "archetypeId": "04-01",
+      "slug": "flask-bud",
+      "name": "플라스크싹",
+      "role": "mascot",
+      "identity": "반응액을 품은 둥근 배양 플라스크가 걸어 다니는 오류체",
+      "motionProfile": "bob",
+      "zoneId": "04",
+      "zoneSlug": "applied-science",
+      "zoneName": "응용 과학동",
+      "palette": [
+        "lime",
+        "violet"
+      ]
+    },
+    {
+      "archetypeId": "04-02",
+      "slug": "cable-ferret",
+      "name": "케이블족제비",
+      "role": "quadruped",
+      "identity": "실험 케이블을 꼬리처럼 끌며 전력을 훔치는 사족 장치",
+      "motionProfile": "runner",
+      "zoneId": "04",
+      "zoneSlug": "applied-science",
+      "zoneName": "응용 과학동",
+      "palette": [
+        "lime",
+        "violet"
+      ]
+    },
+    {
+      "archetypeId": "04-03",
+      "slug": "sensor-wasp",
+      "name": "센서말벌",
+      "role": "flying",
+      "identity": "다중 센서와 샘플 침을 가진 소형 분석 비행체",
+      "motionProfile": "hover",
+      "zoneId": "04",
+      "zoneSlug": "applied-science",
+      "zoneName": "응용 과학동",
+      "palette": [
+        "lime",
+        "violet"
+      ]
+    },
+    {
+      "archetypeId": "04-04",
+      "slug": "lab-assistant",
+      "name": "실험조교",
+      "role": "humanoid",
+      "identity": "샘플 집게와 분석 패널을 든 무인 조교 프레임",
+      "motionProfile": "caster",
+      "zoneId": "04",
+      "zoneSlug": "applied-science",
+      "zoneName": "응용 과학동",
+      "palette": [
+        "lime",
+        "violet"
+      ]
+    },
+    {
+      "archetypeId": "04-05",
+      "slug": "reactor-frame",
+      "name": "반응로프레임",
+      "role": "heavy",
+      "identity": "안전 반응로와 봉쇄 팔이 결합된 대형 실험 장치",
+      "motionProfile": "heavy",
+      "zoneId": "04",
+      "zoneSlug": "applied-science",
+      "zoneName": "응용 과학동",
+      "palette": [
+        "lime",
+        "violet"
+      ]
+    },
+    {
+      "archetypeId": "05-01",
+      "slug": "seedling-pod",
+      "name": "새싹포드",
+      "role": "mascot",
+      "identity": "씨앗 캡슐에서 장난스러운 잎이 돋아난 생태 관리체",
+      "motionProfile": "bob",
+      "zoneId": "05",
+      "zoneSlug": "greenhouse-garden",
+      "zoneName": "온실 정원",
+      "palette": [
+        "green",
+        "yellow"
+      ]
+    },
+    {
+      "archetypeId": "05-02",
+      "slug": "sprinkler-gecko",
+      "name": "살수도마뱀",
+      "role": "quadruped",
+      "identity": "등의 노즐로 과잉 급수하는 도마뱀형 관리 장비",
+      "motionProfile": "runner",
+      "zoneId": "05",
+      "zoneSlug": "greenhouse-garden",
+      "zoneName": "온실 정원",
+      "palette": [
+        "green",
+        "yellow"
+      ]
+    },
+    {
+      "archetypeId": "05-03",
+      "slug": "pollen-bee",
+      "name": "화분벌",
+      "role": "flying",
+      "identity": "꽃가루 카트리지를 달고 잘못된 꽃을 수분하는 비행체",
+      "motionProfile": "hover",
+      "zoneId": "05",
+      "zoneSlug": "greenhouse-garden",
+      "zoneName": "온실 정원",
+      "palette": [
+        "green",
+        "yellow"
+      ]
+    },
+    {
+      "archetypeId": "05-04",
+      "slug": "greenhouse-keeper",
+      "name": "온실관리인",
+      "role": "humanoid",
+      "identity": "전지가위와 환경 패널을 든 원예 관리 로봇",
+      "motionProfile": "caster",
+      "zoneId": "05",
+      "zoneSlug": "greenhouse-garden",
+      "zoneName": "온실 정원",
+      "palette": [
+        "green",
+        "yellow"
+      ]
+    },
+    {
+      "archetypeId": "05-05",
+      "slug": "canopy-titan",
+      "name": "수관거인",
+      "role": "heavy",
+      "identity": "이동식 화단과 거대한 수관이 결합된 생태 장비",
+      "motionProfile": "heavy",
+      "zoneId": "05",
+      "zoneSlug": "greenhouse-garden",
+      "zoneName": "온실 정원",
+      "palette": [
+        "green",
+        "yellow"
+      ]
+    },
+    {
+      "archetypeId": "06-01",
+      "slug": "battery-spark",
+      "name": "배터리불꽃",
+      "role": "mascot",
+      "identity": "충전 단자를 달고 통통 튀는 소형 축전 오류체",
+      "motionProfile": "bob",
+      "zoneId": "06",
+      "zoneSlug": "rooftop-grid",
+      "zoneName": "옥상 전력망",
+      "palette": [
+        "blue",
+        "yellow"
+      ]
+    },
+    {
+      "archetypeId": "06-02",
+      "slug": "panel-ram",
+      "name": "패널숫양",
+      "role": "quadruped",
+      "identity": "태양광 패널 뿔로 빛을 모으는 사족 발전 장치",
+      "motionProfile": "runner",
+      "zoneId": "06",
+      "zoneSlug": "rooftop-grid",
+      "zoneName": "옥상 전력망",
+      "palette": [
+        "blue",
+        "yellow"
+      ]
+    },
+    {
+      "archetypeId": "06-03",
+      "slug": "turbine-kite",
+      "name": "터빈카이트",
+      "role": "flying",
+      "identity": "소형 풍력 날개로 돌풍을 만드는 옥상 비행체",
+      "motionProfile": "hover",
+      "zoneId": "06",
+      "zoneSlug": "rooftop-grid",
+      "zoneName": "옥상 전력망",
+      "palette": [
+        "blue",
+        "yellow"
+      ]
+    },
+    {
+      "archetypeId": "06-04",
+      "slug": "grid-technician",
+      "name": "전력기술원",
+      "role": "humanoid",
+      "identity": "절연 봉과 전력 계측기를 든 정비 프레임",
+      "motionProfile": "caster",
+      "zoneId": "06",
+      "zoneSlug": "rooftop-grid",
+      "zoneName": "옥상 전력망",
+      "palette": [
+        "blue",
+        "yellow"
+      ]
+    },
+    {
+      "archetypeId": "06-05",
+      "slug": "rooftop-transformer",
+      "name": "옥상변압기",
+      "role": "heavy",
+      "identity": "변압기 코일과 낙뢰 차단판이 결합된 중장 장비",
+      "motionProfile": "heavy",
+      "zoneId": "06",
+      "zoneSlug": "rooftop-grid",
+      "zoneName": "옥상 전력망",
+      "palette": [
+        "blue",
+        "yellow"
+      ]
+    },
+    {
+      "archetypeId": "07-01",
+      "slug": "ticket-mouse",
+      "name": "표쥐",
+      "role": "mascot",
+      "identity": "사용 완료 승차권을 모아 둥지를 짓는 소형 검사기",
+      "motionProfile": "bob",
+      "zoneId": "07",
+      "zoneSlug": "underground-transit",
+      "zoneName": "지하 환승로",
+      "palette": [
+        "teal",
+        "orange"
+      ]
+    },
+    {
+      "archetypeId": "07-02",
+      "slug": "rail-hound",
+      "name": "레일하운드",
+      "role": "quadruped",
+      "identity": "바퀴 발과 노선등을 가진 고속 점검 사족체",
+      "motionProfile": "runner",
+      "zoneId": "07",
+      "zoneSlug": "underground-transit",
+      "zoneName": "지하 환승로",
+      "palette": [
+        "teal",
+        "orange"
+      ]
+    },
+    {
+      "archetypeId": "07-03",
+      "slug": "route-drone",
+      "name": "노선드론",
+      "role": "flying",
+      "identity": "경로 투사 렌즈로 잘못된 환승선을 그리는 비행체",
+      "motionProfile": "hover",
+      "zoneId": "07",
+      "zoneSlug": "underground-transit",
+      "zoneName": "지하 환승로",
+      "palette": [
+        "teal",
+        "orange"
+      ]
+    },
+    {
+      "archetypeId": "07-04",
+      "slug": "gate-attendant",
+      "name": "개찰안내원",
+      "role": "humanoid",
+      "identity": "검표 패드와 차단봉을 든 자동 환승 안내원",
+      "motionProfile": "caster",
+      "zoneId": "07",
+      "zoneSlug": "underground-transit",
+      "zoneName": "지하 환승로",
+      "palette": [
+        "teal",
+        "orange"
+      ]
+    },
+    {
+      "archetypeId": "07-05",
+      "slug": "transit-loader",
+      "name": "환승적재기",
+      "role": "heavy",
+      "identity": "수하물 벨트와 개찰문이 합쳐진 대형 운송 장비",
+      "motionProfile": "heavy",
+      "zoneId": "07",
+      "zoneSlug": "underground-transit",
+      "zoneName": "지하 환승로",
+      "palette": [
+        "teal",
+        "orange"
+      ]
+    },
+    {
+      "archetypeId": "08-01",
+      "slug": "tray-blob",
+      "name": "식판젤리",
+      "role": "mascot",
+      "identity": "남은 열량 데이터가 식판 위에서 뭉친 작은 오류체",
+      "motionProfile": "bob",
+      "zoneId": "08",
+      "zoneSlug": "student-cafeteria",
+      "zoneName": "학생 식당",
+      "palette": [
+        "red",
+        "cream"
+      ]
+    },
+    {
+      "archetypeId": "08-02",
+      "slug": "toaster-pup",
+      "name": "토스터퍼피",
+      "role": "quadruped",
+      "identity": "굽기 슬롯 몸통에서 과열 토스트를 발사하는 사족 기기",
+      "motionProfile": "runner",
+      "zoneId": "08",
+      "zoneSlug": "student-cafeteria",
+      "zoneName": "학생 식당",
+      "palette": [
+        "red",
+        "cream"
+      ]
+    },
+    {
+      "archetypeId": "08-03",
+      "slug": "cup-drone",
+      "name": "컵드론",
+      "role": "flying",
+      "identity": "음료 컵 홀더와 냉각 팬을 가진 배식 비행체",
+      "motionProfile": "hover",
+      "zoneId": "08",
+      "zoneSlug": "student-cafeteria",
+      "zoneName": "학생 식당",
+      "palette": [
+        "red",
+        "cream"
+      ]
+    },
+    {
+      "archetypeId": "08-04",
+      "slug": "kitchen-server",
+      "name": "주방서버",
+      "role": "humanoid",
+      "identity": "국자 팔과 주문 패드를 가진 자동 배식원",
+      "motionProfile": "caster",
+      "zoneId": "08",
+      "zoneSlug": "student-cafeteria",
+      "zoneName": "학생 식당",
+      "palette": [
+        "red",
+        "cream"
+      ]
+    },
+    {
+      "archetypeId": "08-05",
+      "slug": "boiler-chef",
+      "name": "보일러셰프",
+      "role": "heavy",
+      "identity": "대형 보온 솥과 증기 배관이 합쳐진 조리 장비",
+      "motionProfile": "heavy",
+      "zoneId": "08",
+      "zoneSlug": "student-cafeteria",
+      "zoneName": "학생 식당",
+      "palette": [
+        "red",
+        "cream"
+      ]
+    },
+    {
+      "archetypeId": "09-01",
+      "slug": "dust-bunny",
+      "name": "먼지토끼",
+      "role": "mascot",
+      "identity": "청소 기록과 섬유 먼지가 뭉쳐 뛰어다니는 관리체",
+      "motionProfile": "bob",
+      "zoneId": "09",
+      "zoneSlug": "student-dormitory",
+      "zoneName": "생활 기숙사",
+      "palette": [
+        "sky",
+        "pink"
+      ]
+    },
+    {
+      "archetypeId": "09-02",
+      "slug": "laundry-hound",
+      "name": "세탁하운드",
+      "role": "quadruped",
+      "identity": "회전 드럼 몸통으로 빨랫감을 삼키는 사족 가전",
+      "motionProfile": "runner",
+      "zoneId": "09",
+      "zoneSlug": "student-dormitory",
+      "zoneName": "생활 기숙사",
+      "palette": [
+        "sky",
+        "pink"
+      ]
+    },
+    {
+      "archetypeId": "09-03",
+      "slug": "hanger-bat",
+      "name": "옷걸이박쥐",
+      "role": "flying",
+      "identity": "접이식 옷걸이 날개로 복도를 순회하는 비행체",
+      "motionProfile": "hover",
+      "zoneId": "09",
+      "zoneSlug": "student-dormitory",
+      "zoneName": "생활 기숙사",
+      "palette": [
+        "sky",
+        "pink"
+      ]
+    },
+    {
+      "archetypeId": "09-04",
+      "slug": "dorm-manager",
+      "name": "생활관리원",
+      "role": "humanoid",
+      "identity": "점검 태블릿과 마스터키 장치를 든 기숙사 관리 프레임",
+      "motionProfile": "caster",
+      "zoneId": "09",
+      "zoneSlug": "student-dormitory",
+      "zoneName": "생활 기숙사",
+      "palette": [
+        "sky",
+        "pink"
+      ]
+    },
+    {
+      "archetypeId": "09-05",
+      "slug": "wardrobe-keeper",
+      "name": "옷장수호기",
+      "role": "heavy",
+      "identity": "수납장과 세탁 모듈이 결합된 대형 생활 장비",
+      "motionProfile": "heavy",
+      "zoneId": "09",
+      "zoneSlug": "student-dormitory",
+      "zoneName": "생활 기숙사",
+      "palette": [
+        "sky",
+        "pink"
+      ]
+    },
+    {
+      "archetypeId": "10-01",
+      "slug": "balloon-sprout",
+      "name": "풍선싹",
+      "role": "mascot",
+      "identity": "행사 풍선과 안내 데이터가 결합된 가벼운 마스코트",
+      "motionProfile": "bob",
+      "zoneId": "10",
+      "zoneSlug": "festival-street",
+      "zoneName": "축제 거리",
+      "palette": [
+        "magenta",
+        "yellow"
+      ]
+    },
+    {
+      "archetypeId": "10-02",
+      "slug": "parade-hound",
+      "name": "행진하운드",
+      "role": "quadruped",
+      "identity": "깃발 마운트와 북 장치를 등에 단 사족 행진체",
+      "motionProfile": "runner",
+      "zoneId": "10",
+      "zoneSlug": "festival-street",
+      "zoneName": "축제 거리",
+      "palette": [
+        "magenta",
+        "yellow"
+      ]
+    },
+    {
+      "archetypeId": "10-03",
+      "slug": "confetti-kite",
+      "name": "색종이카이트",
+      "role": "flying",
+      "identity": "색종이 카트리지를 흩뿌리며 부유하는 행사 드론",
+      "motionProfile": "hover",
+      "zoneId": "10",
+      "zoneSlug": "festival-street",
+      "zoneName": "축제 거리",
+      "palette": [
+        "magenta",
+        "yellow"
+      ]
+    },
+    {
+      "archetypeId": "10-04",
+      "slug": "stage-helper",
+      "name": "무대도우미",
+      "role": "humanoid",
+      "identity": "조명봉과 큐 패널을 든 자동 무대 스태프",
+      "motionProfile": "caster",
+      "zoneId": "10",
+      "zoneSlug": "festival-street",
+      "zoneName": "축제 거리",
+      "palette": [
+        "magenta",
+        "yellow"
+      ]
+    },
+    {
+      "archetypeId": "10-05",
+      "slug": "carousel-brute",
+      "name": "회전목마브루트",
+      "role": "heavy",
+      "identity": "놀이기구 축과 대형 스피커가 결합된 축제 중장체",
+      "motionProfile": "heavy",
+      "zoneId": "10",
+      "zoneSlug": "festival-street",
+      "zoneName": "축제 거리",
+      "palette": [
+        "magenta",
+        "yellow"
+      ]
+    },
+    {
+      "archetypeId": "11-01",
+      "slug": "buoy-pod",
+      "name": "부표포드",
+      "role": "mascot",
+      "identity": "경고등과 부력 캡슐로 통통 튀는 수상 표식체",
+      "motionProfile": "bob",
+      "zoneId": "11",
+      "zoneSlug": "aquatic-center",
+      "zoneName": "수상 훈련장",
+      "palette": [
+        "aqua",
+        "coral"
+      ]
+    },
+    {
+      "archetypeId": "11-02",
+      "slug": "fin-runner",
+      "name": "핀러너",
+      "role": "quadruped",
+      "identity": "지느러미 발과 수압 탱크를 가진 수륙 사족 장비",
+      "motionProfile": "runner",
+      "zoneId": "11",
+      "zoneSlug": "aquatic-center",
+      "zoneName": "수상 훈련장",
+      "palette": [
+        "aqua",
+        "coral"
+      ]
+    },
+    {
+      "archetypeId": "11-03",
+      "slug": "lifeguard-drone",
+      "name": "구조드론",
+      "role": "flying",
+      "identity": "구명환 링과 탐색 렌즈를 가진 수상 비행체",
+      "motionProfile": "hover",
+      "zoneId": "11",
+      "zoneSlug": "aquatic-center",
+      "zoneName": "수상 훈련장",
+      "palette": [
+        "aqua",
+        "coral"
+      ]
+    },
+    {
+      "archetypeId": "11-04",
+      "slug": "pool-attendant",
+      "name": "수영장관리원",
+      "role": "humanoid",
+      "identity": "수질 측정봉과 구조 패드를 든 관리 프레임",
+      "motionProfile": "caster",
+      "zoneId": "11",
+      "zoneSlug": "aquatic-center",
+      "zoneName": "수상 훈련장",
+      "palette": [
+        "aqua",
+        "coral"
+      ]
+    },
+    {
+      "archetypeId": "11-05",
+      "slug": "wave-machine",
+      "name": "파동발생기",
+      "role": "heavy",
+      "identity": "대형 펌프와 파도 생성판이 결합된 수상 훈련 장비",
+      "motionProfile": "heavy",
+      "zoneId": "11",
+      "zoneSlug": "aquatic-center",
+      "zoneName": "수상 훈련장",
+      "palette": [
+        "aqua",
+        "coral"
+      ]
+    },
+    {
+      "archetypeId": "12-01",
+      "slug": "starling-orb",
+      "name": "별구슬",
+      "role": "mascot",
+      "identity": "미세 별자리 투영이 새어 나오는 구형 학습 장치",
+      "motionProfile": "bob",
+      "zoneId": "12",
+      "zoneSlug": "observatory",
+      "zoneName": "천문 관측소",
+      "palette": [
+        "violet",
+        "cyan"
+      ]
+    },
+    {
+      "archetypeId": "12-02",
+      "slug": "comet-hound",
+      "name": "혜성하운드",
+      "role": "quadruped",
+      "identity": "꼬리형 추진광을 끌며 궤도를 달리는 사족 관측체",
+      "motionProfile": "runner",
+      "zoneId": "12",
+      "zoneSlug": "observatory",
+      "zoneName": "천문 관측소",
+      "palette": [
+        "violet",
+        "cyan"
+      ]
+    },
+    {
+      "archetypeId": "12-03",
+      "slug": "orbit-kite",
+      "name": "궤도카이트",
+      "role": "flying",
+      "identity": "소형 위성 링과 관측 렌즈가 공전하는 비행체",
+      "motionProfile": "hover",
+      "zoneId": "12",
+      "zoneSlug": "observatory",
+      "zoneName": "천문 관측소",
+      "palette": [
+        "violet",
+        "cyan"
+      ]
+    },
+    {
+      "archetypeId": "12-04",
+      "slug": "observatory-aide",
+      "name": "관측조교",
+      "role": "humanoid",
+      "identity": "성도 패널과 방향 보정기를 든 천문 조교 프레임",
+      "motionProfile": "caster",
+      "zoneId": "12",
+      "zoneSlug": "observatory",
+      "zoneName": "천문 관측소",
+      "palette": [
+        "violet",
+        "cyan"
+      ]
+    },
+    {
+      "archetypeId": "12-05",
+      "slug": "telescope-giant",
+      "name": "망원거인",
+      "role": "heavy",
+      "identity": "대형 망원경과 회전 돔이 결합된 관측 중장체",
+      "motionProfile": "heavy",
+      "zoneId": "12",
+      "zoneSlug": "observatory",
+      "zoneName": "천문 관측소",
+      "palette": [
+        "violet",
+        "cyan"
+      ]
+    },
+    {
+      "archetypeId": "13-01",
+      "slug": "packet-bug",
+      "name": "패킷벌레",
+      "role": "mascot",
+      "identity": "누락된 데이터 조각을 등에 싣고 다니는 작은 오류체",
+      "motionProfile": "bob",
+      "zoneId": "13",
+      "zoneSlug": "data-center",
+      "zoneName": "중앙 데이터실",
+      "palette": [
+        "cyan",
+        "red"
+      ]
+    },
+    {
+      "archetypeId": "13-02",
+      "slug": "cable-hound",
+      "name": "케이블하운드",
+      "role": "quadruped",
+      "identity": "광케이블 꼬리와 포트 턱을 가진 네트워크 사족체",
+      "motionProfile": "runner",
+      "zoneId": "13",
+      "zoneSlug": "data-center",
+      "zoneName": "중앙 데이터실",
+      "palette": [
+        "cyan",
+        "red"
+      ]
+    },
+    {
+      "archetypeId": "13-03",
+      "slug": "firewall-drone",
+      "name": "방화벽드론",
+      "role": "flying",
+      "identity": "차단판 날개로 승인되지 않은 신호를 밀어내는 비행체",
+      "motionProfile": "hover",
+      "zoneId": "13",
+      "zoneSlug": "data-center",
+      "zoneName": "중앙 데이터실",
+      "palette": [
+        "cyan",
+        "red"
+      ]
+    },
+    {
+      "archetypeId": "13-04",
+      "slug": "server-operator",
+      "name": "서버운영원",
+      "role": "humanoid",
+      "identity": "포트 도구와 상태 패널을 든 데이터실 운영 프레임",
+      "motionProfile": "caster",
+      "zoneId": "13",
+      "zoneSlug": "data-center",
+      "zoneName": "중앙 데이터실",
+      "palette": [
+        "cyan",
+        "red"
+      ]
+    },
+    {
+      "archetypeId": "13-05",
+      "slug": "mainframe-guard",
+      "name": "메인프레임가드",
+      "role": "heavy",
+      "identity": "서버 랙과 냉각 차폐판이 합쳐진 보안 중장체",
+      "motionProfile": "heavy",
+      "zoneId": "13",
+      "zoneSlug": "data-center",
+      "zoneName": "중앙 데이터실",
+      "palette": [
+        "cyan",
+        "red"
+      ]
+    },
+    {
+      "archetypeId": "14-01",
+      "slug": "paint-drop",
+      "name": "물감방울",
+      "role": "mascot",
+      "identity": "색상 보정 데이터가 둥근 물감 캡슐로 뭉친 오류체",
+      "motionProfile": "bob",
+      "zoneId": "14",
+      "zoneSlug": "art-studio",
+      "zoneName": "미술 실습실",
+      "palette": [
+        "coral",
+        "blue"
+      ]
+    },
+    {
+      "archetypeId": "14-02",
+      "slug": "easel-hound",
+      "name": "이젤하운드",
+      "role": "quadruped",
+      "identity": "접이식 이젤 몸통과 붓 꼬리를 가진 사족 도구",
+      "motionProfile": "runner",
+      "zoneId": "14",
+      "zoneSlug": "art-studio",
+      "zoneName": "미술 실습실",
+      "palette": [
+        "coral",
+        "blue"
+      ]
+    },
+    {
+      "archetypeId": "14-03",
+      "slug": "palette-moth",
+      "name": "팔레트나방",
+      "role": "flying",
+      "identity": "팔레트 날개에서 잘못된 색 조합을 뿌리는 비행체",
+      "motionProfile": "hover",
+      "zoneId": "14",
+      "zoneSlug": "art-studio",
+      "zoneName": "미술 실습실",
+      "palette": [
+        "coral",
+        "blue"
+      ]
+    },
+    {
+      "archetypeId": "14-04",
+      "slug": "studio-assistant",
+      "name": "화실조교",
+      "role": "humanoid",
+      "identity": "대형 붓과 색상 패널을 든 미술 조교 프레임",
+      "motionProfile": "caster",
+      "zoneId": "14",
+      "zoneSlug": "art-studio",
+      "zoneName": "미술 실습실",
+      "palette": [
+        "coral",
+        "blue"
+      ]
+    },
+    {
+      "archetypeId": "14-05",
+      "slug": "sculpture-golem",
+      "name": "조형골렘",
+      "role": "heavy",
+      "identity": "회전 조형대와 재료 압축기가 합쳐진 대형 장비",
+      "motionProfile": "heavy",
+      "zoneId": "14",
+      "zoneSlug": "art-studio",
+      "zoneName": "미술 실습실",
+      "palette": [
+        "coral",
+        "blue"
+      ]
+    },
+    {
+      "archetypeId": "15-01",
+      "slug": "note-sprite",
+      "name": "음표정령",
+      "role": "mascot",
+      "identity": "박자 교정 신호가 둥근 스피커 몸에 깃든 작은 오류체",
+      "motionProfile": "bob",
+      "zoneId": "15",
+      "zoneSlug": "music-wing",
+      "zoneName": "음악 연습동",
+      "palette": [
+        "violet",
+        "yellow"
+      ]
+    },
+    {
+      "archetypeId": "15-02",
+      "slug": "rhythm-hound",
+      "name": "리듬하운드",
+      "role": "quadruped",
+      "identity": "메트로놈 등판과 페달 발을 가진 사족 연습 장비",
+      "motionProfile": "runner",
+      "zoneId": "15",
+      "zoneSlug": "music-wing",
+      "zoneName": "음악 연습동",
+      "palette": [
+        "violet",
+        "yellow"
+      ]
+    },
+    {
+      "archetypeId": "15-03",
+      "slug": "speaker-bat",
+      "name": "스피커박쥐",
+      "role": "flying",
+      "identity": "진동판 날개로 불협화음을 퍼뜨리는 비행체",
+      "motionProfile": "hover",
+      "zoneId": "15",
+      "zoneSlug": "music-wing",
+      "zoneName": "음악 연습동",
+      "palette": [
+        "violet",
+        "yellow"
+      ]
+    },
+    {
+      "archetypeId": "15-04",
+      "slug": "rehearsal-conductor",
+      "name": "연습지휘자",
+      "role": "humanoid",
+      "identity": "박자봉과 믹서 패널을 든 자동 지휘 프레임",
+      "motionProfile": "caster",
+      "zoneId": "15",
+      "zoneSlug": "music-wing",
+      "zoneName": "음악 연습동",
+      "palette": [
+        "violet",
+        "yellow"
+      ]
+    },
+    {
+      "archetypeId": "15-05",
+      "slug": "organ-frame",
+      "name": "오르간프레임",
+      "role": "heavy",
+      "identity": "파이프 스피커와 공명함이 결합된 대형 음향 장비",
+      "motionProfile": "heavy",
+      "zoneId": "15",
+      "zoneSlug": "music-wing",
+      "zoneName": "음악 연습동",
+      "palette": [
+        "violet",
+        "yellow"
+      ]
+    },
+    {
+      "archetypeId": "16-01",
+      "slug": "chalk-mouse",
+      "name": "분필쥐",
+      "role": "mascot",
+      "identity": "지워진 수업 기록을 가루로 흘리는 작은 교구 오류체",
+      "motionProfile": "bob",
+      "zoneId": "16",
+      "zoneSlug": "old-campus",
+      "zoneName": "구교사",
+      "palette": [
+        "blue-gray",
+        "gold"
+      ]
+    },
+    {
+      "archetypeId": "16-02",
+      "slug": "desk-hound",
+      "name": "책상하운드",
+      "role": "quadruped",
+      "identity": "낡은 책상판과 서랍 몸통을 가진 사족 교구",
+      "motionProfile": "runner",
+      "zoneId": "16",
+      "zoneSlug": "old-campus",
+      "zoneName": "구교사",
+      "palette": [
+        "blue-gray",
+        "gold"
+      ]
+    },
+    {
+      "archetypeId": "16-03",
+      "slug": "memory-owl",
+      "name": "기억올빼미",
+      "role": "flying",
+      "identity": "오래된 수업 영상을 렌즈 눈에 반복 재생하는 비행체",
+      "motionProfile": "hover",
+      "zoneId": "16",
+      "zoneSlug": "old-campus",
+      "zoneName": "구교사",
+      "palette": [
+        "blue-gray",
+        "gold"
+      ]
+    },
+    {
+      "archetypeId": "16-04",
+      "slug": "old-school-prefect",
+      "name": "구교사감독원",
+      "role": "humanoid",
+      "identity": "출석 패드와 낡은 지시봉을 든 감독 프레임",
+      "motionProfile": "caster",
+      "zoneId": "16",
+      "zoneSlug": "old-campus",
+      "zoneName": "구교사",
+      "palette": [
+        "blue-gray",
+        "gold"
+      ]
+    },
+    {
+      "archetypeId": "16-05",
+      "slug": "bell-tower-shell",
+      "name": "종탑쉘",
+      "role": "heavy",
+      "identity": "교내 종과 석조 프레임이 결합된 기억 중장체",
+      "motionProfile": "heavy",
+      "zoneId": "16",
+      "zoneSlug": "old-campus",
+      "zoneName": "구교사",
+      "palette": [
+        "blue-gray",
+        "gold"
+      ]
+    },
+    {
+      "archetypeId": "17-01",
+      "slug": "cone-sprout",
+      "name": "콘싹",
+      "role": "mascot",
+      "identity": "안전 콘 안에서 경고등 눈이 자라난 작은 공사 오류체",
+      "motionProfile": "bob",
+      "zoneId": "17",
+      "zoneSlug": "construction-yard",
+      "zoneName": "증축 공사장",
+      "palette": [
+        "orange",
+        "charcoal"
+      ]
+    },
+    {
+      "archetypeId": "17-02",
+      "slug": "rivet-hound",
+      "name": "리벳하운드",
+      "role": "quadruped",
+      "identity": "리벳 발과 공구함 등판을 가진 사족 정비 장비",
+      "motionProfile": "runner",
+      "zoneId": "17",
+      "zoneSlug": "construction-yard",
+      "zoneName": "증축 공사장",
+      "palette": [
+        "orange",
+        "charcoal"
+      ]
+    },
+    {
+      "archetypeId": "17-03",
+      "slug": "survey-drone",
+      "name": "측량드론",
+      "role": "flying",
+      "identity": "레이저 측량 렌즈와 접이식 표식을 가진 비행체",
+      "motionProfile": "hover",
+      "zoneId": "17",
+      "zoneSlug": "construction-yard",
+      "zoneName": "증축 공사장",
+      "palette": [
+        "orange",
+        "charcoal"
+      ]
+    },
+    {
+      "archetypeId": "17-04",
+      "slug": "weld-worker",
+      "name": "용접작업원",
+      "role": "humanoid",
+      "identity": "용접 토치와 안전 차폐판을 든 작업 프레임",
+      "motionProfile": "caster",
+      "zoneId": "17",
+      "zoneSlug": "construction-yard",
+      "zoneName": "증축 공사장",
+      "palette": [
+        "orange",
+        "charcoal"
+      ]
+    },
+    {
+      "archetypeId": "17-05",
+      "slug": "crane-loader",
+      "name": "크레인로더",
+      "role": "heavy",
+      "identity": "소형 크레인과 대형 적재 다리가 결합된 중장 장비",
+      "motionProfile": "heavy",
+      "zoneId": "17",
+      "zoneSlug": "construction-yard",
+      "zoneName": "증축 공사장",
+      "palette": [
+        "orange",
+        "charcoal"
+      ]
+    },
+    {
+      "archetypeId": "18-01",
+      "slug": "badge-orb",
+      "name": "배지구슬",
+      "role": "mascot",
+      "identity": "만료된 출입 권한이 구형 인증 장치에 남은 오류체",
+      "motionProfile": "bob",
+      "zoneId": "18",
+      "zoneSlug": "security-sector",
+      "zoneName": "보안 통제구",
+      "palette": [
+        "red",
+        "cyan"
+      ]
+    },
+    {
+      "archetypeId": "18-02",
+      "slug": "shield-hound",
+      "name": "실드하운드",
+      "role": "quadruped",
+      "identity": "측면 차단판과 경보 코어를 가진 추적 사족체",
+      "motionProfile": "runner",
+      "zoneId": "18",
+      "zoneSlug": "security-sector",
+      "zoneName": "보안 통제구",
+      "palette": [
+        "red",
+        "cyan"
+      ]
+    },
+    {
+      "archetypeId": "18-03",
+      "slug": "camera-kite",
+      "name": "감시카이트",
+      "role": "flying",
+      "identity": "다중 카메라 코어와 얇은 차단 날개를 가진 비행체",
+      "motionProfile": "hover",
+      "zoneId": "18",
+      "zoneSlug": "security-sector",
+      "zoneName": "보안 통제구",
+      "palette": [
+        "red",
+        "cyan"
+      ]
+    },
+    {
+      "archetypeId": "18-04",
+      "slug": "security-officer",
+      "name": "보안관리원",
+      "role": "humanoid",
+      "identity": "전자 방패와 인증 스캐너를 든 보안 프레임",
+      "motionProfile": "caster",
+      "zoneId": "18",
+      "zoneSlug": "security-sector",
+      "zoneName": "보안 통제구",
+      "palette": [
+        "red",
+        "cyan"
+      ]
+    },
+    {
+      "archetypeId": "18-05",
+      "slug": "blockade-unit",
+      "name": "봉쇄유닛",
+      "role": "heavy",
+      "identity": "자동 차단벽과 경보 포드가 결합된 중장 보안체",
+      "motionProfile": "heavy",
+      "zoneId": "18",
+      "zoneSlug": "security-sector",
+      "zoneName": "보안 통제구",
+      "palette": [
+        "red",
+        "cyan"
+      ]
+    },
+    {
+      "archetypeId": "19-01",
+      "slug": "pillow-sprite",
+      "name": "베개정령",
+      "role": "mascot",
+      "identity": "수면 패턴이 부드러운 캡슐 몸에 깃든 작은 오류체",
+      "motionProfile": "bob",
+      "zoneId": "19",
+      "zoneSlug": "dream-simulator",
+      "zoneName": "꿈 시뮬레이터",
+      "palette": [
+        "lavender",
+        "mint"
+      ]
+    },
+    {
+      "archetypeId": "19-02",
+      "slug": "dream-hound",
+      "name": "꿈하운드",
+      "role": "quadruped",
+      "identity": "흐릿한 별빛 꼬리와 쿠션 장갑을 가진 사족 시뮬레이션",
+      "motionProfile": "runner",
+      "zoneId": "19",
+      "zoneSlug": "dream-simulator",
+      "zoneName": "꿈 시뮬레이터",
+      "palette": [
+        "lavender",
+        "mint"
+      ]
+    },
+    {
+      "archetypeId": "19-03",
+      "slug": "star-kite",
+      "name": "별잠카이트",
+      "role": "flying",
+      "identity": "별 조각 날개와 졸린 렌즈를 가진 부유 오류체",
+      "motionProfile": "hover",
+      "zoneId": "19",
+      "zoneSlug": "dream-simulator",
+      "zoneName": "꿈 시뮬레이터",
+      "palette": [
+        "lavender",
+        "mint"
+      ]
+    },
+    {
+      "archetypeId": "19-04",
+      "slug": "sleep-technician",
+      "name": "수면기술원",
+      "role": "humanoid",
+      "identity": "꿈 파형 패널과 조정 봉을 든 시뮬레이터 관리 프레임",
+      "motionProfile": "caster",
+      "zoneId": "19",
+      "zoneSlug": "dream-simulator",
+      "zoneName": "꿈 시뮬레이터",
+      "palette": [
+        "lavender",
+        "mint"
+      ]
+    },
+    {
+      "archetypeId": "19-05",
+      "slug": "lucid-colossus",
+      "name": "자각거상",
+      "role": "heavy",
+      "identity": "대형 수면 캡슐과 부유 링이 결합된 꿈 중장체",
+      "motionProfile": "heavy",
+      "zoneId": "19",
+      "zoneSlug": "dream-simulator",
+      "zoneName": "꿈 시뮬레이터",
+      "palette": [
+        "lavender",
+        "mint"
+      ]
+    },
+    {
+      "archetypeId": "20-01",
+      "slug": "core-seed",
+      "name": "코어씨앗",
+      "role": "mascot",
+      "identity": "그리드 초기화 명령이 작은 백색 코어로 응축된 오류체",
+      "motionProfile": "bob",
+      "zoneId": "20",
+      "zoneSlug": "grid-core",
+      "zoneName": "그리드 코어",
+      "palette": [
+        "white",
+        "cyan"
+      ]
+    },
+    {
+      "archetypeId": "20-02",
+      "slug": "protocol-hound",
+      "name": "프로토콜하운드",
+      "role": "quadruped",
+      "identity": "규칙 블록 장갑과 동기화 꼬리를 가진 사족 관리체",
+      "motionProfile": "runner",
+      "zoneId": "20",
+      "zoneSlug": "grid-core",
+      "zoneName": "그리드 코어",
+      "palette": [
+        "white",
+        "cyan"
+      ]
+    },
+    {
+      "archetypeId": "20-03",
+      "slug": "ring-drone",
+      "name": "링드론",
+      "role": "flying",
+      "identity": "회전하는 관리 링과 백색 렌즈 코어를 가진 비행체",
+      "motionProfile": "hover",
+      "zoneId": "20",
+      "zoneSlug": "grid-core",
+      "zoneName": "그리드 코어",
+      "palette": [
+        "white",
+        "cyan"
+      ]
+    },
+    {
+      "archetypeId": "20-04",
+      "slug": "grid-administrator",
+      "name": "그리드관리자",
+      "role": "humanoid",
+      "identity": "권한 패널과 재설정 키를 든 최상위 관리 프레임",
+      "motionProfile": "caster",
+      "zoneId": "20",
+      "zoneSlug": "grid-core",
+      "zoneName": "그리드 코어",
+      "palette": [
+        "white",
+        "cyan"
+      ]
+    },
+    {
+      "archetypeId": "20-05",
+      "slug": "reset-engine",
+      "name": "리셋엔진",
+      "role": "heavy",
+      "identity": "도시 실습망의 초기화 코어와 봉쇄 장갑이 결합된 최종 중장체",
+      "motionProfile": "heavy",
+      "zoneId": "20",
+      "zoneSlug": "grid-core",
+      "zoneName": "그리드 코어",
+      "palette": [
+        "white",
+        "cyan"
+      ]
+    }
+  ]
+}

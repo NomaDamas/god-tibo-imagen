@@ -13,6 +13,7 @@ npm run dev
 
 ```bash
 npm run verify:assets
+npm run verify:monsters
 npm run build
 ```
 
@@ -25,5 +26,21 @@ npm run build
 - `public/assets/effects`: 투명 배경 전투 이펙트 3종
 - `public/assets/reference`: 선택한 방향 원본
 - `src/data/asset-manifest.json`: 화면 배치, 크기, 방향, 체력 데이터
+- `src/data/monster-archetypes.json`: 20구역·100원형 정본
+- `src/data/monster-catalog.json`: 네 등급을 확장한 400종 카탈로그
+- `public/assets/monsters`: 제작이 끝난 투명 몬스터 컷아웃
 
 UI는 이미지에 굽지 않고 React와 CSS로 구성했다. 일시정지, 배속, AUTO, 방치 보상, 스킬 코스트와 전투 타이머가 동작한다.
+
+## 400종 몬스터 생산
+
+몬스터는 투명 PNG 한 장과 공용 모션 프로필로 움직인다. `MONSTER LAB`에서 첫 생산 배치 12종의 대기·이동·공격·피격·사망 상태를 확인할 수 있다.
+
+```bash
+npm run build:monster-catalog
+npm run verify:monster-catalog
+npm run test:monsters
+npm run verify:monster-assets
+```
+
+첫 생산 배치는 중앙 광장의 안내구슬, 배너하운드, 순찰카이트를 기초형·강화형·오류형·초월형으로 확장한 12종이다. 이 검증 배치가 통과한 뒤 같은 계약으로 나머지 388종을 만든다.

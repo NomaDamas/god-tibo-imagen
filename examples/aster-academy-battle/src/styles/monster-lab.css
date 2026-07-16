@@ -1,0 +1,150 @@
+.view-switcher {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  z-index: 500;
+  display: flex;
+  translate: -50% 0;
+  border: 2px solid white;
+  background: rgba(23, 51, 88, .82);
+  box-shadow: 0 5px 15px rgba(23, 51, 88, .2);
+}
+
+.view-switcher button {
+  height: 30px;
+  padding: 0 12px;
+  border: 0;
+  color: rgba(255, 255, 255, .68);
+  background: transparent;
+  cursor: pointer;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.view-switcher button.is-active { color: var(--navy); background: white; }
+
+.monster-lab {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  color: var(--navy);
+  background: #eaf7ff;
+}
+
+.monster-lab__header {
+  height: 62px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 11px 18px 9px;
+  border-bottom: 1px solid var(--line);
+  background: rgba(255, 255, 255, .92);
+}
+
+.monster-lab__header div:first-child { display: grid; gap: 1px; }
+.monster-lab__header small { color: var(--cyan-dark); font-size: 8px; font-weight: 700; letter-spacing: .12em; }
+.monster-lab__header strong { font-size: 14px; }
+
+.monster-lab__runtime { display: flex; gap: 5px; }
+.monster-lab__runtime button {
+  min-width: 38px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  color: white;
+  background: var(--cyan-dark);
+  cursor: pointer;
+  font-weight: 700;
+}
+.monster-lab__runtime svg { width: 15px; }
+
+.monster-lab__preview {
+  position: absolute;
+  top: 74px;
+  bottom: 14px;
+  left: 14px;
+  width: 42%;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: white;
+  box-shadow: 0 10px 28px rgba(29, 92, 132, .12);
+}
+
+.monster-lab__identity { position: absolute; top: 15px; left: 17px; z-index: 3; }
+.monster-lab__identity span { color: var(--cyan-dark); font-size: 9px; font-weight: 700; }
+.monster-lab__identity h2 { margin: 1px 0 0; font-size: 22px; line-height: 1.1; }
+.monster-lab__identity p { margin: 4px 0 0; color: #688198; font-size: 9px; font-weight: 600; }
+
+.monster-lab__stage {
+  position: absolute;
+  top: 37px;
+  right: 36px;
+  bottom: 53px;
+  left: 36px;
+}
+
+.monster-lab__states {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  left: 10px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 4px;
+}
+
+.monster-lab__states button {
+  height: 30px;
+  border: 1px solid var(--line);
+  color: #557088;
+  background: #edf7fc;
+  cursor: pointer;
+  font-size: 9px;
+  font-weight: 700;
+}
+.monster-lab__states button.is-active { border-color: var(--cyan); color: white; background: var(--cyan); }
+
+.monster-lab__catalog {
+  position: absolute;
+  top: 74px;
+  right: 14px;
+  bottom: 14px;
+  left: calc(42% + 28px);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 7px;
+}
+
+.monster-lab__catalog button {
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid rgba(41, 132, 190, .18);
+  background: white;
+  cursor: pointer;
+  box-shadow: 0 5px 14px rgba(29, 92, 132, .08);
+}
+
+.monster-lab__catalog button.is-selected { border: 2px solid var(--cyan); background: #e8faff; }
+.monster-lab__catalog img { position: absolute; inset: 3px 6px 19px; width: calc(100% - 12px); height: calc(100% - 22px); object-fit: contain; }
+.monster-lab__catalog span { position: absolute; bottom: 6px; left: 7px; font-size: 8px; font-weight: 700; }
+.monster-lab__catalog small { position: absolute; right: 6px; bottom: 6px; color: var(--cyan-dark); font-size: 7px; font-weight: 700; }
+
+@media (max-width: 620px) {
+  .game-shell:has(.monster-lab) { height: min(390px, 100dvh); aspect-ratio: auto; }
+  .game-shell:has(.monster-lab) .view-switcher { top: 7px; left: 7px; translate: 0 0; }
+  .game-shell:has(.monster-lab) .view-switcher button { padding: 0 7px; }
+  .monster-lab__header { height: 48px; padding: 6px 9px; }
+  .monster-lab__header > div:first-child { display: none; }
+  .monster-lab__preview { top: 55px; right: 7px; left: 7px; width: auto; height: 151px; }
+  .monster-lab__catalog { top: 213px; right: 7px; bottom: 7px; left: 7px; grid-template-columns: repeat(6, 1fr); gap: 3px; }
+  .monster-lab__identity { top: 7px; left: 8px; }
+  .monster-lab__identity h2 { font-size: 14px; }
+  .monster-lab__identity p { display: none; }
+  .monster-lab__stage { top: 20px; right: 31%; bottom: 32px; left: 31%; }
+  .monster-lab__states { right: 4px; bottom: 4px; left: 4px; gap: 2px; }
+  .monster-lab__states button { height: 23px; padding: 0; font-size: 7px; }
+  .monster-lab__catalog span { bottom: 3px; left: 3px; font-size: 6px; }
+  .monster-lab__catalog small { display: none; }
+}

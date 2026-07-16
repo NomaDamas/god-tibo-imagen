@@ -1,0 +1,7 @@
+{
+  "bob": { "idle": 920, "move": 520, "attack": 360, "hit": 90, "death": 420 },
+  "runner": { "idle": 1100, "move": 420, "attack": 420, "hit": 90, "death": 420 },
+  "hover": { "idle": 1500, "move": 900, "attack": 520, "hit": 90, "death": 420 },
+  "caster": { "idle": 1300, "move": 720, "attack": 620, "hit": 90, "death": 420 },
+  "heavy": { "idle": 1800, "move": 960, "attack": 760, "hit": 90, "death": 420 }
+}
