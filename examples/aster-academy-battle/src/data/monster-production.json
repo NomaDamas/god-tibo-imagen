@@ -29,6 +29,11 @@
     { "zoneId": "06", "slug": "panel-ram" },
     { "zoneId": "06", "slug": "turbine-kite" },
     { "zoneId": "06", "slug": "grid-technician" },
-    { "zoneId": "06", "slug": "rooftop-transformer" }
+    { "zoneId": "06", "slug": "rooftop-transformer" },
+    { "zoneId": "07", "slug": "ticket-mouse" },
+    { "zoneId": "07", "slug": "rail-hound" },
+    { "zoneId": "07", "slug": "route-drone" },
+    { "zoneId": "07", "slug": "gate-attendant" },
+    { "zoneId": "07", "slug": "transit-loader" }
   ]
 }

@@ -6,7 +6,7 @@
 - Asset verification: PASS, 16 raster assets
 - Monster catalog verification: PASS, 20 zones / 100 archetypes / 400 unique entries
 - Monster system tests: PASS, 6 tests
-- Monster cutout verification: PASS, 120 RGBA cutouts
+- Monster cutout verification: PASS, 140 RGBA cutouts
 - Production build: PASS
 - HTTP smoke check: PASS (`/` and representative PNG returned 200)
 - Visual screenshot comparison: BLOCKED
@@ -22,6 +22,6 @@
 - 844×390 고정 비율 안에서 HUD가 절대 배치됨
 - 버튼은 모두 실제 상호작용에 연결됨
 - 캐릭터·적·이펙트는 투명 PNG 계약을 통과함
-- `MONSTER LAB`은 6개 구역·30개 계열·120종 선택, 다섯 동작, 일시정지, 배속을 코드로 연결함
+- `MONSTER LAB`은 7개 구역·35개 계열·140종 선택, 다섯 동작, 일시정지, 배속을 코드로 연결함
 
 final result: blocked — 브라우저 캡처 기반 시각 비교 필요
