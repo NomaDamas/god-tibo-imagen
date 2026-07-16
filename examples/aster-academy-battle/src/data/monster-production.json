@@ -14,6 +14,11 @@
     { "zoneId": "03", "slug": "hurdle-hound" },
     { "zoneId": "03", "slug": "whistle-drone" },
     { "zoneId": "03", "slug": "drill-coach" },
-    { "zoneId": "03", "slug": "scoreboard-golem" }
+    { "zoneId": "03", "slug": "scoreboard-golem" },
+    { "zoneId": "04", "slug": "flask-bud" },
+    { "zoneId": "04", "slug": "cable-ferret" },
+    { "zoneId": "04", "slug": "sensor-wasp" },
+    { "zoneId": "04", "slug": "lab-assistant" },
+    { "zoneId": "04", "slug": "reactor-frame" }
   ]
 }
