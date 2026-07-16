@@ -114,13 +114,29 @@
 }
 
 .monster-lab__families {
-  height: 35px;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
   gap: 4px;
+}
+
+.monster-lab__zones {
+  height: 25px;
+  display: flex;
+  gap: 4px;
+  margin-bottom: 4px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.monster-lab__zones::-webkit-scrollbar { display: none; }
+.monster-lab__zones button { flex: 1 0 110px; }
+
+.monster-lab__families {
+  height: 31px;
+  grid-template-columns: repeat(5, 1fr);
   margin-bottom: 7px;
 }
 
+.monster-lab__zones button,
 .monster-lab__families button {
   min-width: 0;
   overflow: hidden;
@@ -134,6 +150,7 @@
   white-space: nowrap;
 }
 
+.monster-lab__zones button.is-active,
 .monster-lab__families button.is-active {
   border-color: var(--cyan);
   color: white;
@@ -142,7 +159,7 @@
 
 .monster-lab__catalog {
   position: absolute;
-  top: 42px;
+  top: 67px;
   right: 0;
   bottom: 0;
   left: 0;
@@ -174,9 +191,11 @@
   .monster-lab__header > div:first-child { display: none; }
   .monster-lab__preview { top: 55px; right: 7px; left: 7px; width: auto; height: 151px; }
   .monster-lab__browser { top: 213px; right: 7px; bottom: 7px; left: 7px; }
-  .monster-lab__families { height: 25px; gap: 2px; margin-bottom: 3px; }
+  .monster-lab__zones { height: 19px; gap: 2px; margin-bottom: 2px; }
+  .monster-lab__families { height: 22px; gap: 2px; margin-bottom: 3px; }
+  .monster-lab__zones button,
   .monster-lab__families button { padding: 0 2px; font-size: 6px; }
-  .monster-lab__catalog { top: 28px; grid-template: 1fr / repeat(4, 1fr); gap: 3px; }
+  .monster-lab__catalog { top: 46px; grid-template: 1fr / repeat(4, 1fr); gap: 3px; }
   .monster-lab__identity { top: 7px; left: 8px; }
   .monster-lab__identity h2 { font-size: 14px; }
   .monster-lab__identity p { display: none; }
