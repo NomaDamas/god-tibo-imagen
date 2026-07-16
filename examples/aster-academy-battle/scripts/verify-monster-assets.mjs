@@ -5,23 +5,30 @@ import { PNG } from "pngjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const catalog = JSON.parse(await readFile(path.join(root, "src/data/monster-catalog.json"), "utf8"));
-const firstBatchSlugs = new Set(["guide-orb", "banner-hound", "patrol-kite"]);
-const firstBatch = catalog.filter(
-  (monster) => monster.zoneId === "01" && firstBatchSlugs.has(monster.slug),
+const production = JSON.parse(await readFile(path.join(root, "src/data/monster-production.json"), "utf8"));
+const productionKeys = new Set(
+  production.archetypes.map(({ zoneId, slug }) => `${zoneId}:${slug}`),
 );
+if (productionKeys.size !== production.archetypes.length) {
+  throw new Error("production manifest contains duplicate archetypes");
+}
+const produced = catalog.filter((monster) => productionKeys.has(`${monster.zoneId}:${monster.slug}`));
+const expectedCount = production.archetypes.length * 4;
 
-if (firstBatch.length !== 12) throw new Error(`expected 12 first-batch monsters, received ${firstBatch.length}`);
+if (produced.length !== expectedCount) {
+  throw new Error(`expected ${expectedCount} produced monsters, received ${produced.length}`);
+}
 
 const monsterRoot = path.join(root, "public/assets/monsters");
 const actualMonsterFiles = (await readdir(monsterRoot, { recursive: true }))
   .filter((file) => file.endsWith(".png"))
   .map((file) => file.split(path.sep).join("/"))
   .sort();
-const expectedMonsterFiles = firstBatch
+const expectedMonsterFiles = produced
   .map((monster) => monster.asset.replace("/assets/monsters/", ""))
   .sort();
 if (actualMonsterFiles.join(",") !== expectedMonsterFiles.join(",")) {
-  throw new Error("monster asset tree must contain exactly the 12 first-batch PNG paths");
+  throw new Error(`monster asset tree must contain exactly the ${expectedCount} produced PNG paths`);
 }
 
 function alphaAt(image, x, y) {
@@ -52,14 +59,16 @@ function alphaBounds(image) {
   };
 }
 
-for (const slug of firstBatchSlugs) {
-  const directory = path.join(monsterRoot, "01-central-plaza", slug);
+for (const { zoneId, slug } of production.archetypes) {
+  const sample = catalog.find((monster) => monster.zoneId === zoneId && monster.slug === slug);
+  if (!sample) throw new Error(`${zoneId}:${slug}: missing from monster catalog`);
+  const directory = path.join(monsterRoot, `${zoneId}-${sample.zoneSlug}`, slug);
   const files = (await readdir(directory)).filter((file) => file.endsWith(".png")).sort();
   const expected = ["advanced.png", "basic.png", "glitched.png", "overdrive.png"];
   if (files.join(",") !== expected.join(",")) throw new Error(`${slug}: expected exactly four tier PNGs`);
 }
 
-for (const monster of firstBatch) {
+for (const monster of produced) {
   const absolutePath = path.join(root, "public", monster.asset);
   const buffer = await readFile(absolutePath);
   if (buffer.subarray(0, 8).toString("hex") !== "89504e470d0a1a0a") {
@@ -97,4 +106,4 @@ for (const monster of firstBatch) {
   );
 }
 
-console.log("Verified 12 transparent monster cutouts.");
+console.log(`Verified ${expectedCount} transparent monster cutouts.`);

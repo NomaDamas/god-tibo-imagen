@@ -3,10 +3,10 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 import {
   actorClassNames,
-  getFirstBatchMonsters,
+  getProducedMonsters,
 } from "../src/lib/monster-system.js";
 
-test("first production batch contains three archetypes and four tiers", () => {
+test("production manifest selects completed archetypes and all four tiers", () => {
   const catalog = [
     ...["basic", "advanced", "glitched", "overdrive"].map((tier) => ({ zoneId: "01", slug: "guide-orb", tier })),
     ...["basic", "advanced", "glitched", "overdrive"].map((tier) => ({ zoneId: "01", slug: "banner-hound", tier })),
@@ -14,10 +14,47 @@ test("first production batch contains three archetypes and four tiers", () => {
     { zoneId: "01", slug: "sign-caretaker", tier: "basic" },
     { zoneId: "02", slug: "index-mite", tier: "basic" },
   ];
+  const production = {
+    archetypes: [
+      { zoneId: "01", slug: "guide-orb" },
+      { zoneId: "01", slug: "banner-hound" },
+      { zoneId: "01", slug: "patrol-kite" },
+      { zoneId: "01", slug: "sign-caretaker" },
+    ],
+  };
 
-  const batch = getFirstBatchMonsters(catalog);
-  assert.equal(batch.length, 12);
-  assert.deepEqual(new Set(batch.map((monster) => monster.slug)), new Set(["guide-orb", "banner-hound", "patrol-kite"]));
+  const batch = getProducedMonsters(catalog, production);
+  assert.equal(batch.length, 13);
+  assert.deepEqual(
+    new Set(batch.map((monster) => monster.slug)),
+    new Set(["guide-orb", "banner-hound", "patrol-kite", "sign-caretaker"]),
+  );
+});
+
+test("production manifest contains the complete Central Plaza family", async () => {
+  const production = JSON.parse(
+    await readFile(new URL("../src/data/monster-production.json", import.meta.url), "utf8"),
+  );
+  assert.deepEqual(production.archetypes, [
+    { zoneId: "01", slug: "guide-orb" },
+    { zoneId: "01", slug: "banner-hound" },
+    { zoneId: "01", slug: "patrol-kite" },
+    { zoneId: "01", slug: "sign-caretaker" },
+    { zoneId: "01", slug: "plaza-warden" },
+  ]);
+
+  const catalog = JSON.parse(
+    await readFile(new URL("../src/data/monster-catalog.json", import.meta.url), "utf8"),
+  );
+  const produced = getProducedMonsters(catalog, production);
+  assert.equal(produced.length, 20);
+  for (const { zoneId, slug } of production.archetypes) {
+    assert.equal(
+      produced.filter((monster) => monster.zoneId === zoneId && monster.slug === slug).length,
+      4,
+      `${zoneId}:${slug} must have four tiers`,
+    );
+  }
 });
 
 test("archetype source is a flat 100-entry contract with zone fields", async () => {

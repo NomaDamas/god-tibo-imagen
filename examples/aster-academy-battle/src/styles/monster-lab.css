@@ -105,14 +105,49 @@
 }
 .monster-lab__states button.is-active { border-color: var(--cyan); color: white; background: var(--cyan); }
 
-.monster-lab__catalog {
+.monster-lab__browser {
   position: absolute;
   top: 74px;
   right: 14px;
   bottom: 14px;
   left: calc(42% + 28px);
+}
+
+.monster-lab__families {
+  height: 35px;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
+  gap: 4px;
+  margin-bottom: 7px;
+}
+
+.monster-lab__families button {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid rgba(41, 132, 190, .18);
+  color: #5f788f;
+  background: rgba(255, 255, 255, .82);
+  cursor: pointer;
+  font-size: 8px;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.monster-lab__families button.is-active {
+  border-color: var(--cyan);
+  color: white;
+  background: var(--cyan);
+}
+
+.monster-lab__catalog {
+  position: absolute;
+  top: 42px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: grid;
+  grid-template: repeat(2, 1fr) / repeat(2, 1fr);
   gap: 7px;
 }
 
@@ -138,7 +173,10 @@
   .monster-lab__header { height: 48px; padding: 6px 9px; }
   .monster-lab__header > div:first-child { display: none; }
   .monster-lab__preview { top: 55px; right: 7px; left: 7px; width: auto; height: 151px; }
-  .monster-lab__catalog { top: 213px; right: 7px; bottom: 7px; left: 7px; grid-template-columns: repeat(6, 1fr); gap: 3px; }
+  .monster-lab__browser { top: 213px; right: 7px; bottom: 7px; left: 7px; }
+  .monster-lab__families { height: 25px; gap: 2px; margin-bottom: 3px; }
+  .monster-lab__families button { padding: 0 2px; font-size: 6px; }
+  .monster-lab__catalog { top: 28px; grid-template: 1fr / repeat(4, 1fr); gap: 3px; }
   .monster-lab__identity { top: 7px; left: 8px; }
   .monster-lab__identity h2 { font-size: 14px; }
   .monster-lab__identity p { display: none; }

@@ -1,9 +1,8 @@
-const firstBatchArchetypes = new Set(["guide-orb", "banner-hound", "patrol-kite"]);
-
-export function getFirstBatchMonsters(catalog) {
-  return catalog.filter(
-    (monster) => monster.zoneId === "01" && firstBatchArchetypes.has(monster.slug),
+export function getProducedMonsters(catalog, production) {
+  const produced = new Set(
+    production.archetypes.map(({ zoneId, slug }) => `${zoneId}:${slug}`),
   );
+  return catalog.filter((monster) => produced.has(`${monster.zoneId}:${monster.slug}`));
 }
 
 export function actorClassNames({ profile, state, paused, replayKey }) {

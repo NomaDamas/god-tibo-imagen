@@ -1,0 +1,9 @@
+{
+  "archetypes": [
+    { "zoneId": "01", "slug": "guide-orb" },
+    { "zoneId": "01", "slug": "banner-hound" },
+    { "zoneId": "01", "slug": "patrol-kite" },
+    { "zoneId": "01", "slug": "sign-caretaker" },
+    { "zoneId": "01", "slug": "plaza-warden" }
+  ]
+}
