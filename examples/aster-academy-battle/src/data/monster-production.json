@@ -54,6 +54,11 @@
     { "zoneId": "11", "slug": "fin-runner" },
     { "zoneId": "11", "slug": "lifeguard-drone" },
     { "zoneId": "11", "slug": "pool-attendant" },
-    { "zoneId": "11", "slug": "wave-machine" }
+    { "zoneId": "11", "slug": "wave-machine" },
+    { "zoneId": "12", "slug": "starling-orb" },
+    { "zoneId": "12", "slug": "comet-hound" },
+    { "zoneId": "12", "slug": "orbit-kite" },
+    { "zoneId": "12", "slug": "observatory-aide" },
+    { "zoneId": "12", "slug": "telescope-giant" }
   ]
 }
