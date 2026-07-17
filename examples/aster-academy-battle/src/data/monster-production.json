@@ -49,6 +49,11 @@
     { "zoneId": "10", "slug": "parade-hound" },
     { "zoneId": "10", "slug": "confetti-kite" },
     { "zoneId": "10", "slug": "stage-helper" },
-    { "zoneId": "10", "slug": "carousel-brute" }
+    { "zoneId": "10", "slug": "carousel-brute" },
+    { "zoneId": "11", "slug": "buoy-pod" },
+    { "zoneId": "11", "slug": "fin-runner" },
+    { "zoneId": "11", "slug": "lifeguard-drone" },
+    { "zoneId": "11", "slug": "pool-attendant" },
+    { "zoneId": "11", "slug": "wave-machine" }
   ]
 }
