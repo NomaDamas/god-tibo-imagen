@@ -153,7 +153,7 @@ Usage:
 Options:
   --prompt <text>               Required prompt text
   --output <path>               Output PNG path
-  --model <name>                Model name (default: CODEX_IMAGEGEN_MODEL or gpt-5.4)
+  --model <name>                Model name (default: CODEX_IMAGEGEN_MODEL or gpt-5.6-terra)
   --provider <name>             Provider: private-codex | codex-cli | auto
   --image <path>                Input image path (can be used multiple times)
   --size <value>                Output image size: auto, 1024x1024, 1536x1024, 1024x1536,

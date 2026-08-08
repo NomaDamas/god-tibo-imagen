@@ -32,7 +32,9 @@ export function resolveConfig(overrides = {}) {
     installationIdFile,
     generatedImagesDir,
     provider: overrides.provider || process.env.CODEX_IMAGEGEN_PROVIDER || PRIVATE_CODEX_PROVIDER,
-    defaultModel: overrides.defaultModel || process.env.CODEX_IMAGEGEN_MODEL || process.env.CODEX_MODEL || 'gpt-5.4',
+    // 2026-08-08: gpt-5.4 is rejected for ChatGPT-auth codex ("not supported when using Codex with a ChatGPT account").
+    // Live-verified image_generation_call: gpt-5.6-terra. Prefer env override / CODEX_MODEL when set.
+    defaultModel: overrides.defaultModel || process.env.CODEX_IMAGEGEN_MODEL || process.env.CODEX_MODEL || 'gpt-5.6-terra',
     defaultOriginator:
       overrides.originator || process.env.CODEX_IMAGEGEN_ORIGINATOR || process.env.CODEX_INTERNAL_ORIGINATOR_OVERRIDE || 'codex_cli_rs',
     defaultOutputPath:

@@ -21,9 +21,15 @@ test('buildResponsesRequest emits expected private Codex request', () => {
   assert.equal(request.headers.Authorization, 'Bearer abc123');
   assert.equal(request.headers['ChatGPT-Account-ID'], 'acct-123');
   assert.equal(request.headers.originator, 'codex_cli_rs');
+  assert.equal(request.headers['User-Agent'], 'codex_cli_rs');
   assert.equal(request.headers.session_id, 'session-123');
   assert.deepEqual(request.body.tools, [{ type: 'image_generation', output_format: 'png' }]);
   assert.equal(request.body.input[0].content[0].text, 'make a blue square');
+  assert.ok(request.body.instructions && request.body.instructions.length > 0);
+  assert.equal(Object.prototype.hasOwnProperty.call(request.body, 'tool_choice'), false);
+  assert.equal(Object.prototype.hasOwnProperty.call(request.body, 'parallel_tool_calls'), false);
+  assert.equal(Object.prototype.hasOwnProperty.call(request.body, 'reasoning'), false);
+  assert.equal(Object.prototype.hasOwnProperty.call(request.body, 'include'), false);
   assert.equal(request.body.client_metadata['x-codex-installation-id'], 'install-123');
   assert.deepEqual(sanitizeHeaders(request.headers), {
     Authorization: 'Bearer [REDACTED]',
@@ -31,6 +37,7 @@ test('buildResponsesRequest emits expected private Codex request', () => {
     'Content-Type': 'application/json',
     Accept: 'text/event-stream',
     originator: 'codex_cli_rs',
+    'User-Agent': 'codex_cli_rs',
     session_id: '[REDACTED_SESSION_ID]'
   });
   assert.deepEqual(request.sanitized.body.client_metadata, {

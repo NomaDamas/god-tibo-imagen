@@ -72,8 +72,18 @@ export function sanitizeRequestBody(body) {
   return clone;
 }
 
+const DEFAULT_IMAGEGEN_INSTRUCTIONS =
+  'You are an image generation assistant. Always use the image_generation tool to produce the requested image. Do not answer with text only.';
+
 /**
  * Build the private Codex `/responses` request payload.
+ *
+ * Live contract (verified 2026-08-08 against chatgpt.com/backend-api/codex/responses):
+ * - tools: [{ type: 'image_generation', output_format: 'png', size? }] works
+ * - non-empty instructions required to bias the model toward image_generation_call
+ * - tool_choice ('required' | 'auto' | allowed_tools | object) → HTTP 400 or no image
+ * - parallel_tool_calls / reasoning / include extras are unnecessary for image gen;
+ *   keep the body minimal so the model actually emits image_generation_call
  *
  * @param {{ baseUrl: string, session: { accessToken: string, accountId: string, installationId?: string | null }, prompt: string, model: string, originator: string, includeReasoning?: boolean, sessionId?: string, images?: string[], size?: string }} options - Request inputs.
  * @returns {{ url: string, sessionId: string, headers: Record<string, string>, body: Record<string, unknown>, sanitized: { url: string, headers: Record<string, string>, body: Record<string, unknown> } }} Request details and a redacted debug copy.
@@ -84,7 +94,7 @@ export function buildResponsesRequest({
   prompt,
   model,
   originator,
-  includeReasoning = true,
+  includeReasoning = false,
   sessionId = crypto.randomUUID(),
   images,
   size
@@ -103,6 +113,7 @@ export function buildResponsesRequest({
     'Content-Type': 'application/json',
     Accept: 'text/event-stream',
     originator,
+    'User-Agent': originator || 'codex_cli_rs',
     session_id: sessionId
   };
 
@@ -113,9 +124,27 @@ export function buildResponsesRequest({
     }
   }
 
+  const imageModel = process.env.CODEX_IMAGEGEN_IMAGE_MODEL || '';
+  const imageTool = {
+    type: 'image_generation',
+    output_format: 'png',
+    ...(size ? { size } : {}),
+    ...(imageModel ? { model: imageModel } : {}),
+    ...(process.env.CODEX_IMAGEGEN_QUALITY ? { quality: process.env.CODEX_IMAGEGEN_QUALITY } : {})
+  };
+
+  const instructions = (
+    process.env.CODEX_IMAGEGEN_INSTRUCTIONS || DEFAULT_IMAGEGEN_INSTRUCTIONS
+  ).trim();
+  if (!instructions) {
+    throw new Error('Image generation instructions must be non-empty.');
+  }
+
+  // Minimal body — do NOT set tool_choice / parallel_tool_calls / reasoning.
+  // Those fields either 400 or suppress image_generation_call on current codex backend.
   const body = {
     model,
-    instructions: '',
+    instructions,
     input: [
       {
         type: 'message',
@@ -123,21 +152,18 @@ export function buildResponsesRequest({
         content
       }
     ],
-    tools: [{
-      type: 'image_generation',
-      output_format: 'png',
-      ...(size ? { size } : {})
-    }],
-    tool_choice: 'auto',
-    parallel_tool_calls: false,
-    reasoning: null,
+    tools: [imageTool],
     store: false,
-    stream: true,
-    include: includeReasoning ? ['reasoning.encrypted_content'] : [],
-    client_metadata: session.installationId
-      ? { 'x-codex-installation-id': session.installationId }
-      : undefined
+    stream: true
   };
+
+  if (includeReasoning) {
+    body.include = ['reasoning.encrypted_content'];
+  }
+
+  if (session.installationId) {
+    body.client_metadata = { 'x-codex-installation-id': session.installationId };
+  }
 
   return {
     url,

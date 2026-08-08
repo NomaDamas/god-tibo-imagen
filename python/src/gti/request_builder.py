@@ -48,6 +48,12 @@ def sanitize_request_body(body: dict[str, Any]) -> dict[str, Any]:
     return cloned
 
 
+DEFAULT_IMAGEGEN_INSTRUCTIONS = (
+    "You are an image generation assistant. Always use the image_generation tool "
+    "to produce the requested image. Do not answer with text only."
+)
+
+
 def build_responses_request(
     *,
     base_url: str,
@@ -55,11 +61,18 @@ def build_responses_request(
     prompt: str,
     model: str,
     originator: str,
-    include_reasoning: bool = True,
+    include_reasoning: bool = False,
     session_id: str | None = None,
     images: list[str] | None = None,
     size: str | None = None,
 ) -> dict[str, Any]:
+    """Build private Codex /responses payload (2026-08-08 live contract).
+
+    - tools image_generation + non-empty instructions, NO tool_choice
+    - omit parallel_tool_calls / reasoning extras (suppress image calls)
+    """
+    import os
+
     if not prompt or not prompt.strip():
         raise make_error("Prompt is required.")
     if size and size not in SUPPORTED_IMAGE_SIZES:
@@ -76,6 +89,7 @@ def build_responses_request(
         "Content-Type": "application/json",
         "Accept": "text/event-stream",
         "originator": originator,
+        "User-Agent": originator or "codex_cli_rs",
         "session_id": session_id,
     }
 
@@ -84,9 +98,26 @@ def build_responses_request(
         for image in images:
             content.append({"type": "input_image", "image_url": image})
 
-    body = {
+    image_tool: dict[str, Any] = {
+        "type": "image_generation",
+        "output_format": "png",
+    }
+    if size:
+        image_tool["size"] = size
+    image_model = os.environ.get("CODEX_IMAGEGEN_IMAGE_MODEL") or ""
+    if image_model:
+        image_tool["model"] = image_model
+    quality = os.environ.get("CODEX_IMAGEGEN_QUALITY")
+    if quality:
+        image_tool["quality"] = quality
+
+    instructions = (os.environ.get("CODEX_IMAGEGEN_INSTRUCTIONS") or DEFAULT_IMAGEGEN_INSTRUCTIONS).strip()
+    if not instructions:
+        raise make_error("Image generation instructions must be non-empty.")
+
+    body: dict[str, Any] = {
         "model": model,
-        "instructions": "",
+        "instructions": instructions,
         "input": [
             {
                 "type": "message",
@@ -94,23 +125,14 @@ def build_responses_request(
                 "content": content,
             }
         ],
-        "tools": [
-            {
-                "type": "image_generation",
-                "output_format": "png",
-                **({"size": size} if size else {}),
-            }
-        ],
-        "tool_choice": "auto",
-        "parallel_tool_calls": False,
-        "reasoning": None,
+        "tools": [image_tool],
         "store": False,
         "stream": True,
-        "include": ["reasoning.encrypted_content"] if include_reasoning else [],
-        "client_metadata": (
-            {"x-codex-installation-id": session["installationId"]} if session.get("installationId") else None
-        ),
     }
+    if include_reasoning:
+        body["include"] = ["reasoning.encrypted_content"]
+    if session.get("installationId"):
+        body["client_metadata"] = {"x-codex-installation-id": session["installationId"]}
 
     return {
         "url": url,

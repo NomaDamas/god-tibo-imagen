@@ -50,7 +50,7 @@ def resolve_config(overrides: dict | None = None) -> dict[str, str]:
             overrides.get("defaultModel")
             or os.environ.get("CODEX_IMAGEGEN_MODEL")
             or os.environ.get("CODEX_MODEL")
-            or "gpt-5.4"
+            or "gpt-5.6-terra"
         ),
         "defaultOriginator": (
             overrides.get("originator")
