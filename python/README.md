@@ -50,21 +50,26 @@ Supported formats: `png`, `jpg`/`jpeg`, `gif`, `webp`.
 
 ### Image model (ChatGPT Images 2.5)
 
-Pass `image_model` to select the model used by the `image_generation` tool itself. ChatGPT Images 2.5 (released 2026-09-08) ships two API models:
+The client defaults to ChatGPT Images 2.5 `gpt-image-2.5-flare`. Pass `image_model` to override:
 
-- `gpt-image-2.5-flare` — the default fast tier (up to 50% lower latency than Images 2.0)
-- `gpt-image-2.5-sunburst` — the slower, higher-precision tier
+- `gpt-image-2.5-flare` — default fast tier (up to 50% lower latency than Images 2.0)
+- `gpt-image-2.5-sunburst` — slower, higher-precision tier
 
 ```python
 result = client.generate_image(
     prompt="a sunset over mountains",
     model="gpt-5.4",
     output_path="./sunset.png",
-    image_model="gpt-image-2.5-flare"
+)
+result = client.generate_image(
+    prompt="a sunset over mountains",
+    model="gpt-5.4",
+    output_path="./sunset.png",
+    image_model="gpt-image-2.5-sunburst",
 )
 ```
 
-The value is forwarded as `model` on the `image_generation` tool config in the private Codex request. You can also set `CODEX_IMAGEGEN_IMAGE_MODEL` as the default.
+The value is forwarded as `model` on the `image_generation` tool config. `CODEX_IMAGEGEN_IMAGE_MODEL` overrides the default.
 
 ### Dry run
 

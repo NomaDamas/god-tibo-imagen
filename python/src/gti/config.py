@@ -13,6 +13,7 @@ UNSUPPORTED_WARNING = (
     "WARNING: This project calls an unsupported private Codex backend path. "
     "The contract may break without notice."
 )
+DEFAULT_IMAGE_MODEL = "gpt-image-2.5-flare"
 
 
 def resolve_config(overrides: dict | None = None) -> dict[str, str]:
@@ -55,7 +56,7 @@ def resolve_config(overrides: dict | None = None) -> dict[str, str]:
         "defaultImageModel": (
             overrides.get("defaultImageModel")
             or os.environ.get("CODEX_IMAGEGEN_IMAGE_MODEL")
-            or None
+            or DEFAULT_IMAGE_MODEL
         ),
         "defaultOriginator": (
             overrides.get("originator")

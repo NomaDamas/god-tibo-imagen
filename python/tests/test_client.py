@@ -158,6 +158,39 @@ def test_client_generate_image_forwards_size(tmp_path):
     assert result.mode == "live"
 
 
+def test_client_generate_image_defaults_to_flare_image_model(tmp_path, monkeypatch):
+    monkeypatch.delenv("CODEX_IMAGEGEN_IMAGE_MODEL", raising=False)
+    auth_file = tmp_path / "auth.json"
+    installation_file = tmp_path / "installation_id"
+    auth_file.write_text(
+        json.dumps(
+            {
+                "auth_mode": "chatgpt",
+                "tokens": {
+                    "access_token": make_jwt({"exp": 32503680000}),
+                    "account_id": "acct-123",
+                },
+            }
+        ),
+        encoding="utf-8",
+    )
+    installation_file.write_text("iid-123", encoding="utf-8")
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        body = json.loads(request.content)
+        assert body["tools"][0]["model"] == "gpt-image-2.5-flare"
+        return httpx.Response(200, headers={"content-type": "text/event-stream"}, text=fixture_text("success.sse"))
+
+    client = Client(authFile=str(auth_file), installationIdFile=str(installation_file), baseUrl="https://chatgpt.com/backend-api/codex")
+    result = client.generate_image(
+        prompt="blue square",
+        output_path=str(tmp_path / "result.png"),
+        client=httpx.Client(transport=httpx.MockTransport(handler)),
+    )
+
+    assert result.mode == "live"
+
+
 def test_client_generate_image_forwards_image_model(tmp_path):
     auth_file = tmp_path / "auth.json"
     installation_file = tmp_path / "installation_id"

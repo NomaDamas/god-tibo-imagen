@@ -151,7 +151,7 @@ class PrivateCodexProvider:
             originator=self.config["defaultOriginator"],
             images=images,
             size=size,
-            image_model=image_model,
+            image_model=image_model or self.config.get("defaultImageModel"),
         )
 
         if dry_run:

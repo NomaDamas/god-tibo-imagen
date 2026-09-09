@@ -119,7 +119,7 @@ async function writeDebugArtifacts({
 /**
  * Create a provider that talks directly to the private Codex HTTP backend.
  *
- * @param {{ baseUrl: string, authFile: string, installationIdFile: string, defaultOriginator: string }} config - Runtime configuration.
+ * @param {{ baseUrl: string, authFile: string, installationIdFile: string, defaultOriginator: string, defaultImageModel?: string }} config - Runtime configuration.
  * @returns {{ generateImage: (args: { prompt: string, model: string, outputPath: string, dryRun?: boolean, debug?: boolean, debugDir?: string, fetchImpl?: typeof fetch, images?: string[], size?: string, imageModel?: string }) => Promise<{ mode: string, warnings: string[], responseId: string | null, sessionId?: string, savedPath?: string, revisedPrompt: string | null, request: unknown, response?: unknown }> }} Provider implementation.
  */
 export function createPrivateCodexProvider(config) {
@@ -135,7 +135,7 @@ export function createPrivateCodexProvider(config) {
         originator: config.defaultOriginator,
         images,
         size,
-        imageModel
+        imageModel: imageModel || config.defaultImageModel || undefined
       });
 
       if (dryRun) {

@@ -159,8 +159,8 @@ Options:
   --prompt <text>               Required prompt text
   --output <path>               Output PNG path
   --model <name>                Model name (default: CODEX_IMAGEGEN_MODEL or gpt-5.4)
-  --image-model <name>          Image model for the image_generation tool (private-codex only),
-                                e.g. gpt-image-2.5-flare or gpt-image-2.5-sunburst
+  --image-model <name>          Image model for the image_generation tool (private-codex only;
+                                default: gpt-image-2.5-flare). Also: gpt-image-2.5-sunburst
   --provider <name>             Provider: private-codex | codex-cli | auto
   --image <path>                Input image path (can be used multiple times)
   --size <value>                Output image size: auto, 1024x1024, 1536x1024, 1024x1536,
@@ -206,7 +206,7 @@ async function main() {
   const result = await provider.generateImage({
     prompt: args.prompt,
     model: args.model || config.defaultModel,
-    imageModel: args.imageModel || config.defaultImageModel || undefined,
+    imageModel: args.imageModel || process.env.CODEX_IMAGEGEN_IMAGE_MODEL || undefined,
     outputPath,
     dryRun: args.dryRun,
     debug: args.debug,

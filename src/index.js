@@ -1,7 +1,7 @@
 // @ts-nocheck
 export { loadCodexSession } from './auth/loadCodexSession.js';
 export { validateCodexSession } from './auth/validateSession.js';
-export { resolveConfig, UNSUPPORTED_WARNING } from './config.js';
+export { resolveConfig, DEFAULT_IMAGE_MODEL, UNSUPPORTED_WARNING } from './config.js';
 export {
   REDACTED_ACCOUNT_ID,
   REDACTED_SESSION_ID,
