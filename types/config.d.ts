@@ -1,8 +1,8 @@
 /**
  * Resolve the runtime configuration for the CLI/library.
  *
- * @param {{ codexHome?: string, baseUrl?: string, authFile?: string, installationIdFile?: string, generatedImagesDir?: string, provider?: string, defaultModel?: string, originator?: string, defaultOutputPath?: string }} [overrides={}] - Optional configuration overrides.
- * @returns {{ baseUrl: string, codexHome: string, authFile: string, installationIdFile: string, generatedImagesDir: string, provider: string, defaultModel: string, defaultOriginator: string, defaultOutputPath: string }} Fully resolved config.
+ * @param {{ codexHome?: string, baseUrl?: string, authFile?: string, installationIdFile?: string, generatedImagesDir?: string, provider?: string, defaultModel?: string, defaultImageModel?: string, originator?: string, defaultOutputPath?: string }} [overrides={}] - Optional configuration overrides.
+ * @returns {{ baseUrl: string, codexHome: string, authFile: string, installationIdFile: string, generatedImagesDir: string, provider: string, defaultModel: string, defaultImageModel: string | null, defaultOriginator: string, defaultOutputPath: string }} Fully resolved config.
  */
 export function resolveConfig(overrides?: {
     codexHome?: string;
@@ -12,6 +12,7 @@ export function resolveConfig(overrides?: {
     generatedImagesDir?: string;
     provider?: string;
     defaultModel?: string;
+    defaultImageModel?: string;
     originator?: string;
     defaultOutputPath?: string;
 }): {
@@ -22,6 +23,7 @@ export function resolveConfig(overrides?: {
     generatedImagesDir: string;
     provider: string;
     defaultModel: string;
+    defaultImageModel: string | null;
     defaultOriginator: string;
     defaultOutputPath: string;
 };

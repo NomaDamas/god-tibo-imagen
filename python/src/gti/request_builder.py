@@ -59,6 +59,7 @@ def build_responses_request(
     session_id: str | None = None,
     images: list[str] | None = None,
     size: str | None = None,
+    image_model: str | None = None,
 ) -> dict[str, Any]:
     if not prompt or not prompt.strip():
         raise make_error("Prompt is required.")
@@ -99,6 +100,7 @@ def build_responses_request(
                 "type": "image_generation",
                 "output_format": "png",
                 **({"size": size} if size else {}),
+                **({"model": image_model} if image_model else {}),
             }
         ],
         "tool_choice": "auto",

@@ -83,6 +83,43 @@ test('buildResponsesRequest forwards size into the image_generation tool config'
   }]);
 });
 
+test('buildResponsesRequest forwards imageModel into the image_generation tool config', () => {
+  const request = buildResponsesRequest({
+    baseUrl: 'https://chatgpt.com/backend-api/codex',
+    session: {
+      accessToken: 'abc123',
+      accountId: 'acct-123',
+      installationId: null
+    },
+    prompt: 'a banana sticker',
+    model: 'gpt-5.4',
+    originator: 'codex_cli_rs',
+    imageModel: 'gpt-image-2.5-flare'
+  });
+
+  assert.deepEqual(request.body.tools, [{
+    type: 'image_generation',
+    output_format: 'png',
+    model: 'gpt-image-2.5-flare'
+  }]);
+});
+
+test('buildResponsesRequest omits tool model key when imageModel is not provided (back-compat)', () => {
+  const request = buildResponsesRequest({
+    baseUrl: 'https://chatgpt.com/backend-api/codex',
+    session: {
+      accessToken: 'abc123',
+      accountId: 'acct-123',
+      installationId: null
+    },
+    prompt: 'a banana sticker',
+    model: 'gpt-5.4',
+    originator: 'codex_cli_rs'
+  });
+
+  assert.equal(Object.prototype.hasOwnProperty.call(request.body.tools[0], 'model'), false);
+});
+
 test('buildResponsesRequest rejects unsupported image size values', () => {
   assert.throws(
     () => buildResponsesRequest({

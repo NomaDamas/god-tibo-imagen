@@ -107,6 +107,19 @@ Supported sizes:
 
 The `--size` flag is forwarded to the `image_generation` tool config and is honored by the private Codex backend. The `codex-cli` provider does not support `--size`; direct `codex-cli` use and `auto` fallback fail fast rather than silently ignoring requested dimensions.
 
+### Image model (ChatGPT Images 2.5)
+
+Pass `--image-model <name>` to select the model used by the `image_generation` tool itself. ChatGPT Images 2.5 (released 2026-09-08) ships two API models:
+
+- `gpt-image-2.5-flare` — the default fast tier (up to 50% lower latency than Images 2.0)
+- `gpt-image-2.5-sunburst` — the slower, higher-precision tier
+
+```bash
+gti --prompt "a sunset over mountains" --image-model gpt-image-2.5-flare --output ./sunset.png
+```
+
+The flag is forwarded as `model` on the `image_generation` tool config in the private Codex request. You can also set `CODEX_IMAGEGEN_IMAGE_MODEL` as the default. The `codex-cli` provider does not support image model selection; direct `codex-cli` use and `auto` fallback fail fast rather than silently ignoring the requested model.
+
 ### Provider modes
 
 ```bash
@@ -170,6 +183,14 @@ const result = await provider.generateImage({
   size: '1536x1024'
 });
 
+// with an image model (ChatGPT Images 2.5)
+const result = await provider.generateImage({
+  prompt: 'a sunset over mountains',
+  model: 'gpt-5.4',
+  outputPath: './sunset.png',
+  imageModel: 'gpt-image-2.5-flare'
+});
+
 // multiple images
 const result = await provider.generateImage({
   prompt: 'Combine these two styles',
@@ -201,6 +222,15 @@ result = client.generate_image(
     model="gpt-5.4",
     output_path="./sunset.png",
     size="1536x1024"
+)
+print(result.saved_path)
+
+# with an image model (ChatGPT Images 2.5)
+result = client.generate_image(
+    prompt="a sunset over mountains",
+    model="gpt-5.4",
+    output_path="./sunset.png",
+    image_model="gpt-image-2.5-flare"
 )
 print(result.saved_path)
 ```

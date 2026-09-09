@@ -120,11 +120,11 @@ async function writeDebugArtifacts({
  * Create a provider that talks directly to the private Codex HTTP backend.
  *
  * @param {{ baseUrl: string, authFile: string, installationIdFile: string, defaultOriginator: string }} config - Runtime configuration.
- * @returns {{ generateImage: (args: { prompt: string, model: string, outputPath: string, dryRun?: boolean, debug?: boolean, debugDir?: string, fetchImpl?: typeof fetch, images?: string[], size?: string }) => Promise<{ mode: string, warnings: string[], responseId: string | null, sessionId?: string, savedPath?: string, revisedPrompt: string | null, request: unknown, response?: unknown }> }} Provider implementation.
+ * @returns {{ generateImage: (args: { prompt: string, model: string, outputPath: string, dryRun?: boolean, debug?: boolean, debugDir?: string, fetchImpl?: typeof fetch, images?: string[], size?: string, imageModel?: string }) => Promise<{ mode: string, warnings: string[], responseId: string | null, sessionId?: string, savedPath?: string, revisedPrompt: string | null, request: unknown, response?: unknown }> }} Provider implementation.
  */
 export function createPrivateCodexProvider(config) {
   return {
-    async generateImage({ prompt, model, outputPath, dryRun = false, debug = false, debugDir, fetchImpl = globalThis.fetch, images, size }) {
+    async generateImage({ prompt, model, outputPath, dryRun = false, debug = false, debugDir, fetchImpl = globalThis.fetch, images, size, imageModel }) {
       const session = await loadCodexSession(config);
       const validation = validateCodexSession(session);
       const request = buildResponsesRequest({
@@ -134,7 +134,8 @@ export function createPrivateCodexProvider(config) {
         model,
         originator: config.defaultOriginator,
         images,
-        size
+        size,
+        imageModel
       });
 
       if (dryRun) {
