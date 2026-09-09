@@ -91,6 +91,22 @@ test('codex-cli provider writes debug summary without raw image payloads', async
   assert.equal(dump.command.args.at(-1), '[PROMPT_REDACTED]');
 });
 
+test('codex-cli provider throws when imageModel is provided', async () => {
+  const dir = await makeTempDir();
+  const generatedImagesDir = path.join(dir, 'generated_images');
+  const provider = createCodexCliProvider({ generatedImagesDir });
+
+  await assert.rejects(
+    async () =>
+      provider.generateImage({
+        prompt: 'red square',
+        outputPath: path.join(dir, 'out.png'),
+        imageModel: 'gpt-image-2.5-flare'
+      }),
+    /does not support image model selection/
+  );
+});
+
 test('codex-cli provider throws when images are provided', async () => {
   const dir = await makeTempDir();
   const generatedImagesDir = path.join(dir, 'generated_images');

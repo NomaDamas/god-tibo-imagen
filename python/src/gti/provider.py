@@ -133,6 +133,7 @@ class PrivateCodexProvider:
         output_path: str,
         images: list[str] | None = None,
         size: str | None = None,
+        image_model: str | None = None,
         dry_run: bool = False,
         debug: bool = False,
         debug_dir: str | Path | None = None,
@@ -150,6 +151,7 @@ class PrivateCodexProvider:
             originator=self.config["defaultOriginator"],
             images=images,
             size=size,
+            image_model=image_model,
         )
 
         if dry_run:

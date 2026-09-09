@@ -9,8 +9,8 @@ const DEFAULT_CODEX_HOME = path.join(os.homedir(), '.codex');
 /**
  * Resolve the runtime configuration for the CLI/library.
  *
- * @param {{ codexHome?: string, baseUrl?: string, authFile?: string, installationIdFile?: string, generatedImagesDir?: string, provider?: string, defaultModel?: string, originator?: string, defaultOutputPath?: string }} [overrides={}] - Optional configuration overrides.
- * @returns {{ baseUrl: string, codexHome: string, authFile: string, installationIdFile: string, generatedImagesDir: string, provider: string, defaultModel: string, defaultOriginator: string, defaultOutputPath: string }} Fully resolved config.
+ * @param {{ codexHome?: string, baseUrl?: string, authFile?: string, installationIdFile?: string, generatedImagesDir?: string, provider?: string, defaultModel?: string, defaultImageModel?: string, originator?: string, defaultOutputPath?: string }} [overrides={}] - Optional configuration overrides.
+ * @returns {{ baseUrl: string, codexHome: string, authFile: string, installationIdFile: string, generatedImagesDir: string, provider: string, defaultModel: string, defaultImageModel: string | null, defaultOriginator: string, defaultOutputPath: string }} Fully resolved config.
  */
 export function resolveConfig(overrides = {}) {
   const codexHome = overrides.codexHome || process.env.CODEX_HOME || DEFAULT_CODEX_HOME;
@@ -33,6 +33,7 @@ export function resolveConfig(overrides = {}) {
     generatedImagesDir,
     provider: overrides.provider || process.env.CODEX_IMAGEGEN_PROVIDER || PRIVATE_CODEX_PROVIDER,
     defaultModel: overrides.defaultModel || process.env.CODEX_IMAGEGEN_MODEL || process.env.CODEX_MODEL || 'gpt-5.4',
+    defaultImageModel: overrides.defaultImageModel || process.env.CODEX_IMAGEGEN_IMAGE_MODEL || null,
     defaultOriginator:
       overrides.originator || process.env.CODEX_IMAGEGEN_ORIGINATOR || process.env.CODEX_INTERNAL_ORIGINATOR_OVERRIDE || 'codex_cli_rs',
     defaultOutputPath:

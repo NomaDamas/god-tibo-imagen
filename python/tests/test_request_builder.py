@@ -81,6 +81,39 @@ def test_build_responses_request_forwards_size_to_tool_config():
     ]
 
 
+def test_build_responses_request_forwards_image_model_to_tool_config():
+    session = {"accessToken": "token-1", "accountId": "acct-1"}
+    result = build_responses_request(
+        base_url="https://chatgpt.com/backend-api/codex",
+        session=session,
+        prompt="make this blue",
+        model="gpt-5.4",
+        originator="codex_cli_rs",
+        image_model="gpt-image-2.5-flare",
+    )
+
+    assert result["body"]["tools"] == [
+        {
+            "type": "image_generation",
+            "output_format": "png",
+            "model": "gpt-image-2.5-flare",
+        }
+    ]
+
+
+def test_build_responses_request_omits_tool_model_when_image_model_none():
+    session = {"accessToken": "token-1", "accountId": "acct-1"}
+    result = build_responses_request(
+        base_url="https://chatgpt.com/backend-api/codex",
+        session=session,
+        prompt="make this blue",
+        model="gpt-5.4",
+        originator="codex_cli_rs",
+    )
+
+    assert "model" not in result["body"]["tools"][0]
+
+
 def test_build_responses_request_rejects_unsupported_size():
     with pytest.raises(Exception) as exc_info:
         build_responses_request(
