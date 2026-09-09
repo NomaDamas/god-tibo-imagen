@@ -139,7 +139,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 24
-          registry-url: https://registry.npmjs.org
 
       - name: Install dependencies
         run: npm ci
@@ -148,7 +147,10 @@ jobs:
         run: npm run build:types
 
       - name: Publish to npm with OIDC
-        run: npm publish --access public
+        run: |
+          set -euo pipefail
+          unset NODE_AUTH_TOKEN NPM_TOKEN NPM_CONFIG_USERCONFIG || true
+          npm publish --access public
 
   publish-pypi:
     name: publish-pypi
