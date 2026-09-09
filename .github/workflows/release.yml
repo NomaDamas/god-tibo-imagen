@@ -4,23 +4,28 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: "Version to release (e.g., 0.2.1)"
+        description: "Version to release (e.g., 0.4.0)"
         required: true
         type: string
+      skip_bump:
+        description: "Skip version bump/tag; publish and GitHub-release an existing vX.Y.Z tag"
+        required: false
+        type: boolean
+        default: false
 
 permissions:
   contents: read
 
 jobs:
-  bump-version:
-    name: bump-version
+  prepare:
+    name: prepare
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    env:
-      RELEASE_VERSION: ${{ inputs.version }}
     steps:
       - name: Validate release input
+        env:
+          RELEASE_VERSION: ${{ inputs.version }}
+          SKIP_BUMP: ${{ inputs.skip_bump }}
+          GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
           if [[ "${{ github.ref_name }}" != "main" ]]; then
@@ -31,11 +36,24 @@ jobs:
             echo "Invalid release version: $RELEASE_VERSION" >&2
             exit 1
           fi
-          if git ls-remote --exit-code --tags origin "refs/tags/v${RELEASE_VERSION}" >/dev/null 2>&1; then
-            echo "Tag v${RELEASE_VERSION} already exists" >&2
-            exit 1
+          if [[ "$SKIP_BUMP" == "true" ]]; then
+            if ! gh api "repos/${{ github.repository }}/git/ref/tags/v${RELEASE_VERSION}" >/dev/null; then
+              echo "skip_bump requires existing tag v${RELEASE_VERSION}" >&2
+              exit 1
+            fi
           fi
 
+  bump-version:
+    name: bump-version
+    needs:
+      - prepare
+    if: ${{ !inputs.skip_bump }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      RELEASE_VERSION: ${{ inputs.version }}
+    steps:
       - name: Check out main
         uses: actions/checkout@v4
         with:
@@ -43,10 +61,18 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
 
+      - name: Refuse to retag
+        run: |
+          set -euo pipefail
+          if git ls-remote --exit-code --tags origin "refs/tags/v${RELEASE_VERSION}" >/dev/null 2>&1; then
+            echo "Tag v${RELEASE_VERSION} already exists" >&2
+            exit 1
+          fi
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -97,9 +123,12 @@ jobs:
     name: publish-npm
     runs-on: ubuntu-latest
     needs:
+      - prepare
       - bump-version
+    if: ${{ always() && needs.prepare.result == 'success' && (inputs.skip_bump || needs.bump-version.result == 'success') && !cancelled() }}
     permissions:
       contents: read
+      id-token: write
     steps:
       - name: Check out repository at tag
         uses: actions/checkout@v4
@@ -109,9 +138,8 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
           registry-url: https://registry.npmjs.org
-          cache: npm
 
       - name: Install dependencies
         run: npm ci
@@ -119,18 +147,19 @@ jobs:
       - name: Build type definitions
         run: npm run build:types
 
-      - name: Publish to npm
+      - name: Publish to npm with OIDC
         run: npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
   publish-pypi:
     name: publish-pypi
     runs-on: ubuntu-latest
     needs:
+      - prepare
       - bump-version
+    if: ${{ always() && needs.prepare.result == 'success' && (inputs.skip_bump || needs.bump-version.result == 'success') && !cancelled() }}
     permissions:
       contents: read
+      id-token: write
     steps:
       - name: Check out repository at tag
         uses: actions/checkout@v4
@@ -150,8 +179,39 @@ jobs:
         working-directory: python
         run: python -m build
 
-      - name: Publish to PyPI
+      - name: Publish to PyPI with OIDC
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           packages-dir: python/dist/
-          password: ${{ secrets.PYPI_API_TOKEN }}
+          skip-existing: true
+
+  github-release:
+    name: github-release
+    runs-on: ubuntu-latest
+    needs:
+      - prepare
+      - bump-version
+    if: ${{ always() && needs.prepare.result == 'success' && (inputs.skip_bump || needs.bump-version.result == 'success') && !cancelled() }}
+    permissions:
+      contents: write
+    env:
+      RELEASE_VERSION: ${{ inputs.version }}
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - name: Check out repository at tag
+        uses: actions/checkout@v4
+        with:
+          ref: v${{ inputs.version }}
+          fetch-depth: 0
+
+      - name: Create GitHub Release
+        run: |
+          set -euo pipefail
+          if gh release view "v${RELEASE_VERSION}" >/dev/null 2>&1; then
+            echo "GitHub Release v${RELEASE_VERSION} already exists"
+          else
+            gh release create "v${RELEASE_VERSION}" \
+              --title "v${RELEASE_VERSION}" \
+              --generate-notes \
+              --verify-tag
+          fi
