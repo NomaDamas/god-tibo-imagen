@@ -106,6 +106,60 @@ def test_wrapper_dry_run_does_not_require_auth(tmp_path, monkeypatch, capsys):
         assert output["response"] == {}
 
 
+def test_wrapper_forwards_image_model(tmp_path, monkeypatch, capsys):
+    auth_file = tmp_path / "auth.json"
+    installation_file = tmp_path / "installation_id"
+    auth_file.write_text(
+        json.dumps(
+            {
+                "auth_mode": "chatgpt",
+                "tokens": {
+                    "access_token": "fake-token",
+                    "account_id": "acct-123",
+                },
+            }
+        ),
+        encoding="utf-8",
+    )
+    installation_file.write_text("iid-123", encoding="utf-8")
+
+    test_args = [
+        str(WRAPPER_PATH),
+        "--prompt",
+        "blue square",
+        "--output",
+        str(tmp_path / "output.png"),
+        "--dry-run",
+        "--image-model",
+        "gpt-image-2.5-flare",
+        "--auth-file",
+        str(auth_file),
+        "--installation-id-file",
+        str(installation_file),
+    ]
+    monkeypatch.setattr(sys, "argv", test_args)
+
+    with patch("gti.client.create_private_codex_provider") as mock_provider:
+        mock_instance = mock_provider.return_value
+        mock_instance.generate_image.return_value = {
+            "mode": "dry-run",
+            "warnings": [],
+            "responseId": "dry-run-123",
+            "savedPath": str(tmp_path / "output.png"),
+            "request": {},
+            "response": {},
+        }
+
+        with pytest.raises(SystemExit) as exc_info:
+            runpy.run_path(str(WRAPPER_PATH), run_name="__main__")
+        assert exc_info.value.code == 0, "wrapper should exit with code 0 on success"
+        assert mock_instance.generate_image.called, "wrapper should call generate_image"
+        _, kwargs = mock_instance.generate_image.call_args
+        assert kwargs.get("image_model") == "gpt-image-2.5-flare", (
+            "wrapper must forward --image-model to the SDK as image_model"
+        )
+
+
 def test_skill_md_has_valid_frontmatter():
     content = SKILL_MD_PATH.read_text(encoding="utf-8")
     assert content.startswith("---\n"), "SKILL.md should start with YAML frontmatter delimiter"

@@ -25,7 +25,12 @@ def main() -> int:
     )
     parser.add_argument("--prompt", required=True, help="Image generation prompt")
     parser.add_argument("--output", help="Output file path")
-    parser.add_argument("--model", help="Model to use (defaults to SDK configuration)")
+    parser.add_argument("--model", help="LLM model to use (defaults to SDK configuration)")
+    parser.add_argument(
+        "--image-model",
+        help="Image model for the image_generation tool "
+        "(gpt-image-2.5-sunburst or gpt-image-2.5-flare; default: sunburst)",
+    )
     parser.add_argument("--dry-run", action="store_true", help="Dry run mode")
     parser.add_argument("--auth-file", help="Path to Codex auth.json")
     parser.add_argument(
@@ -55,6 +60,8 @@ def main() -> int:
     }
     if args.model:
         gen_kwargs["model"] = args.model
+    if args.image_model:
+        gen_kwargs["image_model"] = args.image_model
     if args.output:
         gen_kwargs["output_path"] = args.output
     if args.image:

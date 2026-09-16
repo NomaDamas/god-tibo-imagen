@@ -57,6 +57,23 @@ Allowed values:
 - `1536x1024`, `2048x1152`, `3840x2160` (landscape)
 - `1024x1536`, `2160x3840` (portrait)
 
+### Image model
+
+The private Codex path uses ChatGPT Images 2.5. Pass `--image-model <name>`
+to pick a tier:
+
+- `gpt-image-2.5-sunburst` — default; premium tier, built for workflows that
+  benefit from tighter control across edits
+- `gpt-image-2.5-flare` — fast tier; higher-quality images than GPT-Image-2
+  at up to 50% lower latency
+
+```bash
+gti --prompt "a sunset over mountains" --image-model gpt-image-2.5-flare --output ./sunset.png
+```
+
+The value is forwarded as `model` on the `image_generation` tool config, and
+`CODEX_IMAGEGEN_IMAGE_MODEL` overrides the default.
+
 ### Dry run
 
 Validate auth and print the request without making a network call.
