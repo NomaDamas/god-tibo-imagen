@@ -27,5 +27,5 @@ export function resolveConfig(overrides?: {
     defaultOriginator: string;
     defaultOutputPath: string;
 };
-export const DEFAULT_IMAGE_MODEL: "gpt-image-2.5-flare";
+export const DEFAULT_IMAGE_MODEL: "gpt-image-2.5-sunburst";
 export const UNSUPPORTED_WARNING: "WARNING: This project calls an unsupported private Codex backend path. The contract may break without notice.";

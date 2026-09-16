@@ -26,8 +26,15 @@ def test_resolve_config_uses_env_defaults(monkeypatch, tmp_path):
     assert config["defaultOutputPath"] == str(tmp_path / "out.png")
 
 
-def test_resolve_config_defaults_image_model_to_flare(monkeypatch):
+def test_resolve_config_defaults_image_model_to_sunburst(monkeypatch):
     monkeypatch.delenv("CODEX_IMAGEGEN_IMAGE_MODEL", raising=False)
     config = resolve_config()
     assert config["defaultImageModel"] == DEFAULT_IMAGE_MODEL
-    assert DEFAULT_IMAGE_MODEL == "gpt-image-2.5-flare"
+    assert DEFAULT_IMAGE_MODEL == "gpt-image-2.5-sunburst"
+
+
+def test_resolve_config_defaults_llm_model(monkeypatch):
+    monkeypatch.delenv("CODEX_IMAGEGEN_MODEL", raising=False)
+    monkeypatch.delenv("CODEX_MODEL", raising=False)
+    config = resolve_config()
+    assert config["defaultModel"] == "gpt-5.6-sol"

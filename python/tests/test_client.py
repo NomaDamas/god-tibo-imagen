@@ -158,7 +158,7 @@ def test_client_generate_image_forwards_size(tmp_path):
     assert result.mode == "live"
 
 
-def test_client_generate_image_defaults_to_flare_image_model(tmp_path, monkeypatch):
+def test_client_generate_image_defaults_to_sunburst_image_model(tmp_path, monkeypatch):
     monkeypatch.delenv("CODEX_IMAGEGEN_IMAGE_MODEL", raising=False)
     auth_file = tmp_path / "auth.json"
     installation_file = tmp_path / "installation_id"
@@ -178,7 +178,7 @@ def test_client_generate_image_defaults_to_flare_image_model(tmp_path, monkeypat
 
     def handler(request: httpx.Request) -> httpx.Response:
         body = json.loads(request.content)
-        assert body["tools"][0]["model"] == "gpt-image-2.5-flare"
+        assert body["tools"][0]["model"] == "gpt-image-2.5-sunburst"
         return httpx.Response(200, headers={"content-type": "text/event-stream"}, text=fixture_text("success.sse"))
 
     client = Client(authFile=str(auth_file), installationIdFile=str(installation_file), baseUrl="https://chatgpt.com/backend-api/codex")
