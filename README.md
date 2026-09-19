@@ -109,17 +109,17 @@ The `--size` flag is forwarded to the `image_generation` tool config and is hono
 
 ### Image model (ChatGPT Images 2.5)
 
-The private Codex path defaults to ChatGPT Images 2.5 `gpt-image-2.5-flare`. Pass `--image-model <name>` to override:
+The private Codex path defaults to ChatGPT Images 2.5 `gpt-image-2.5-sunburst`. Pass `--image-model <name>` to override:
 
-- `gpt-image-2.5-flare` — default fast tier (up to 50% lower latency than Images 2.0)
-- `gpt-image-2.5-sunburst` — slower, higher-precision tier
+- `gpt-image-2.5-sunburst` — default premium tier, built for workflows that benefit from tighter control across edits
+- `gpt-image-2.5-flare` — fast tier: higher-quality images than GPT-Image-2 at up to 50% lower latency
 
 ```bash
 gti --prompt "a sunset over mountains" --output ./sunset.png
-gti --prompt "a sunset over mountains" --image-model gpt-image-2.5-sunburst --output ./sunset.png
+gti --prompt "a sunset over mountains" --image-model gpt-image-2.5-flare --output ./sunset.png
 ```
 
-The value is forwarded as `model` on the `image_generation` tool config. `CODEX_IMAGEGEN_IMAGE_MODEL` overrides the default. The `codex-cli` provider does not support image model selection; an explicit `--image-model` or env override fail-fast rather than silently dropping the requested model.
+The value is forwarded as `model` on the `image_generation` tool config. `CODEX_IMAGEGEN_IMAGE_MODEL` overrides the default. Note: live testing shows the backend accepts both names without validating them (unknown names pass too) and acknowledges the tool config with a normalized `gpt-image-2-codex` model in its response echo — selection is therefore best-effort over a private, unvalidated contract. The `codex-cli` provider does not support image model selection; an explicit `--image-model` or env override fail-fast rather than silently dropping the requested model.
 
 ### Provider modes
 
@@ -156,7 +156,7 @@ const provider = createProvider(config);
 
 const result = await provider.generateImage({
   prompt: 'flat blue square icon',
-  model: 'gpt-5.4',
+  model: 'gpt-5.6-sol',
   outputPath: './out.png',
   dryRun: false,
   debug: false
@@ -171,7 +171,7 @@ You can also pass existing images as input:
 // single image
 const result = await provider.generateImage({
   prompt: 'Make this cat wear a hat',
-  model: 'gpt-5.4',
+  model: 'gpt-5.6-sol',
   outputPath: './cat-hat.png',
   images: ['data:image/png;base64,iVBORw0KGgo...']
 });
@@ -179,7 +179,7 @@ const result = await provider.generateImage({
 // with output size
 const result = await provider.generateImage({
   prompt: 'a sunset over mountains',
-  model: 'gpt-5.4',
+  model: 'gpt-5.6-sol',
   outputPath: './sunset.png',
   size: '1536x1024'
 });
@@ -187,7 +187,7 @@ const result = await provider.generateImage({
 // with an image model (ChatGPT Images 2.5)
 const result = await provider.generateImage({
   prompt: 'a sunset over mountains',
-  model: 'gpt-5.4',
+  model: 'gpt-5.6-sol',
   outputPath: './sunset.png',
   imageModel: 'gpt-image-2.5-flare'
 });
@@ -195,7 +195,7 @@ const result = await provider.generateImage({
 // multiple images
 const result = await provider.generateImage({
   prompt: 'Combine these two styles',
-  model: 'gpt-5.4',
+  model: 'gpt-5.6-sol',
   outputPath: './combined.png',
   images: [
     'data:image/png;base64,abc...',
@@ -212,7 +212,7 @@ from gti import Client
 client = Client(provider="private-codex")
 result = client.generate_image(
     prompt="flat blue square icon",
-    model="gpt-5.4",
+    model="gpt-5.6-sol",
     output_path="./out.png"
 )
 print(result.saved_path)
@@ -220,7 +220,7 @@ print(result.saved_path)
 # with output size
 result = client.generate_image(
     prompt="a sunset over mountains",
-    model="gpt-5.4",
+    model="gpt-5.6-sol",
     output_path="./sunset.png",
     size="1536x1024"
 )
@@ -229,7 +229,7 @@ print(result.saved_path)
 # with an image model (ChatGPT Images 2.5)
 result = client.generate_image(
     prompt="a sunset over mountains",
-    model="gpt-5.4",
+    model="gpt-5.6-sol",
     output_path="./sunset.png",
     image_model="gpt-image-2.5-flare"
 )
@@ -242,7 +242,7 @@ You can also pass existing images as input:
 # single image
 result = client.generate_image(
     prompt="Make this cat wear a hat",
-    model="gpt-5.4",
+    model="gpt-5.6-sol",
     output_path="./cat-hat.png",
     image_paths="./cat.png"
 )
@@ -250,7 +250,7 @@ result = client.generate_image(
 # multiple images
 result = client.generate_image(
     prompt="Combine these two styles",
-    model="gpt-5.4",
+    model="gpt-5.6-sol",
     output_path="./combined.png",
     image_paths=["./style-a.png", "./style-b.png"]
 )
@@ -276,7 +276,7 @@ const provider = createProvider(config);
 
 const result = await provider.generateImage({
   prompt: 'flat blue square icon',
-  model: 'gpt-5.4',
+  model: 'gpt-5.6-sol',
   outputPath: './out.png',
 });
 
@@ -291,7 +291,7 @@ from gti import Client
 client = Client(provider="private-codex")
 result = client.generate_image(
     prompt="flat blue square icon",
-    model="gpt-5.4",
+    model="gpt-5.6-sol",
     output_path="./out.png"
 )
 print(result.saved_path)
@@ -302,7 +302,7 @@ With image inputs:
 ```python
 result = client.generate_image(
     prompt="Make this cat wear a hat",
-    model="gpt-5.4",
+    model="gpt-5.6-sol",
     output_path="./cat-hat.png",
     image_paths="./cat.png"
 )

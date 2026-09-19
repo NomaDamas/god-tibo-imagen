@@ -35,6 +35,6 @@ test('library entrypoint exposes public API', () => {
 
   assert.equal(typeof api.createProvider, 'function');
   assert.equal(typeof api.resolveConfig, 'function');
-  assert.equal(api.DEFAULT_IMAGE_MODEL, 'gpt-image-2.5-flare');
+  assert.equal(api.DEFAULT_IMAGE_MODEL, 'gpt-image-2.5-sunburst');
   assert.equal(api.SUPPORTED_PROVIDERS.includes(api.AUTO_PROVIDER), true);
 });
