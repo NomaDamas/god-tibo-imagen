@@ -139,6 +139,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 24
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Install dependencies
         run: npm ci
@@ -146,11 +147,22 @@ jobs:
       - name: Build type definitions
         run: npm run build:types
 
-      - name: Publish to npm with OIDC
+      - name: Publish to npm with OIDC (direct, with staged fallback)
         run: |
-          set -euo pipefail
+          set -uo pipefail
           unset NODE_AUTH_TOKEN NPM_TOKEN NPM_CONFIG_USERCONFIG || true
-          npm publish --access public
+          # npm >= 11.15 is required for staged publishing commands
+          npm install -g npm@latest >/dev/null
+          if npm publish --access public 2>&1 | tee /tmp/npm-publish.log; then
+            echo "Published god-tibo-imagen directly to npm."
+          elif grep -q "OIDC permission denied" /tmp/npm-publish.log; then
+            echo "::warning::Direct npm publish denied by the trusted publisher (stage-only allowed actions). Staging the package instead — a maintainer must approve it with 2FA: npmjs.com → Staged Packages tab, or 'npm stage approve <stage-id>'."
+            npm stage publish
+            npm stage list god-tibo-imagen || true
+          else
+            cat /tmp/npm-publish.log
+            exit 1
+          fi
 
   publish-pypi:
     name: publish-pypi
