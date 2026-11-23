@@ -8,6 +8,8 @@ Node.js library and CLI for sending image-generation requests to Codex's private
 
 > WARNING: This is **not** a supported public API integration. It depends on private Codex request behavior that may change without notice.
 
+Hands-on walkthrough (Korean): [Codex로 이미지 만들고 고치기](https://blog.nomadamas.org/posts/god-tibo-imagen/) on the NomaDamas blog.
+
 ## What it does
 
 - Reuses local Codex ChatGPT auth from `~/.codex/auth.json`
